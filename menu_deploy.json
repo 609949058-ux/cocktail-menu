@@ -1,0 +1,723 @@
+{
+ "title": "周六的Cocktail Menu",
+ "dog_image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/dog_xiaobai.gif",
+ "music": {
+  "title": "上善如酒",
+  "artist": "杨千嬅",
+  "file": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/shangshanrujiu.mp3",
+  "lrc": [
+   [
+    14.13,
+    "人有几多烦忧 才发酵出红酒"
+   ],
+   [
+    21.14,
+    "入到口甘苦也被迫参透"
+   ],
+   [
+    28.37,
+    "澎湃喝到醇厚 忘记了却还有"
+   ],
+   [
+    35.73,
+    "愁绪到肚里伤春只会更悲秋"
+   ],
+   [
+    42.92,
+    "麻醉得多长久 一清醒也颤抖"
+   ],
+   [
+    49.79,
+    "逝去的伤口困在那樽口"
+   ],
+   [
+    57.15,
+    "年少发泄过每滴愁 浓度就似烈酒"
+   ],
+   [
+    64.12,
+    "味觉挥之不去你也得接受"
+   ],
+   [
+    69.47,
+    "遗忘但怎么的失忆都记得起"
+   ],
+   [
+    77.54,
+    "何尝又不想拥有撇脱那运气"
+   ],
+   [
+    84.63,
+    "然而泪水哭不够那份量怎好好清理"
+   ],
+   [
+    92.72,
+    "待你呕心沥血 喝够苦涩味"
+   ],
+   [
+    98.07,
+    "难忘像清酒的清晰都记不起"
+   ],
+   [
+    106.1,
+    "随年份几经蒸制看透了是非"
+   ],
+   [
+    113.39,
+    "暴烈地吞风饮雨到现在懂饮酒的你"
+   ],
+   [
+    121.46,
+    "洞察苦之美 痛苦记便记"
+   ],
+   [
+    142.81,
+    "昂贵干邑如水 茶也清得如水"
+   ],
+   [
+    150.15,
+    "是你的心境诱导你的嘴"
+   ],
+   [
+    157.41,
+    "嫌弃你疼爱你是谁 如荷叶与露水"
+   ],
+   [
+    164.32,
+    "就似酒精蒸发愧疚的眼泪"
+   ],
+   [
+    169.81,
+    "遗忘但怎么的失忆都记得起"
+   ],
+   [
+    177.87,
+    "何尝又不想拥有撇脱那运气"
+   ],
+   [
+    184.92,
+    "然而泪水哭不够那份量怎好好清理"
+   ],
+   [
+    193.01,
+    "待你呕心沥血 喝够苦涩味"
+   ],
+   [
+    198.4,
+    "难忘像清酒的清晰都记不起"
+   ],
+   [
+    206.49,
+    "随年份几经蒸制看透了是非"
+   ],
+   [
+    213.62,
+    "暴烈地吞风饮雨到现在懂饮酒的你"
+   ],
+   [
+    221.59,
+    "洞察苦之美 痛苦记便记"
+   ],
+   [
+    236.52,
+    "轻轻清风中浅酌悲喜"
+   ],
+   [
+    242.82,
+    "年份刚刚足够细味动人遗憾味"
+   ]
+  ]
+ },
+ "cocktails": [
+  {
+   "id": "painkiller",
+   "name_en": "Painkiller",
+   "name_zh": "止痛药",
+   "category": "Rum 朗姆",
+   "accent": "#e8b54a",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/painkiller.jpg",
+   "glass": "Hurricane 飓风杯",
+   "garnish": "肉豆蔻粉 + 菠萝角",
+   "method": "摇和/直接 Build",
+   "notes": "热带朗姆饮品，椰香与菠萝橙汁的海岛风味。",
+   "dilution": 0.2,
+   "ingredients": [
+    {
+     "name": "黑/白朗姆 Rum",
+     "parts": 2,
+     "abv": 40
+    },
+    {
+     "name": "菠萝汁 Pineapple Juice",
+     "parts": 4,
+     "abv": 0
+    },
+    {
+     "name": "鲜橙汁 Orange Juice",
+     "parts": 1,
+     "abv": 0
+    },
+    {
+     "name": "椰浆 Cream of Coconut",
+     "parts": 1,
+     "abv": 0
+    }
+   ]
+  },
+  {
+   "id": "gin-tonic",
+   "name_en": "Gin & Tonic",
+   "name_zh": "金汤力",
+   "category": "Gin 金酒",
+   "accent": "#cfe3c0",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/gin-tonic.jpg",
+   "glass": "Highball 高杯",
+   "garnish": "青柠角 / 黄瓜片",
+   "method": "直接 Build",
+   "notes": "最经典的金酒长饮，奎宁的微苦回甘。",
+   "dilution": 0.2,
+   "ingredients": [
+    {
+     "name": "金酒 Gin",
+     "parts": 1,
+     "abv": 40
+    },
+    {
+     "name": "汤力水 Tonic Water",
+     "parts": 2.5,
+     "abv": 0
+    }
+   ]
+  },
+  {
+   "id": "tom-collins",
+   "name_en": "Tom Collins",
+   "name_zh": "汤姆柯林斯",
+   "category": "Gin 金酒",
+   "accent": "#cfe8a0",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/tom-collins.jpg",
+   "glass": "Highball 高杯",
+   "garnish": "柠檬片 + 樱桃",
+   "method": "摇和+注满 Build",
+   "notes": "金酒版柠檬汽水，长饮清爽。",
+   "dilution": 0.3,
+   "ingredients": [
+    {
+     "name": "金酒 Gin",
+     "parts": 2,
+     "abv": 40
+    },
+    {
+     "name": "鲜柠檬汁 Lemon Juice",
+     "parts": 1,
+     "abv": 0
+    },
+    {
+     "name": "糖浆 Sugar Syrup",
+     "parts": 1,
+     "abv": 0
+    },
+    {
+     "name": "苏打水 Soda",
+     "parts": 3,
+     "abv": 0
+    }
+   ]
+  },
+  {
+   "id": "cuba-libre",
+   "name_en": "Cuba Libre",
+   "name_zh": "自由古巴",
+   "category": "Rum 朗姆",
+   "accent": "#8a5a2a",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/cuba-libre.jpg",
+   "glass": "Highball 高杯",
+   "garnish": "青柠角",
+   "method": "直接 Build",
+   "notes": "朗姆+可乐+青柠，古巴自由之名，轻松长饮。",
+   "dilution": 0.2,
+   "ingredients": [
+    {
+     "name": "白朗姆 White Rum",
+     "parts": 1.5,
+     "abv": 40
+    },
+    {
+     "name": "鲜青柠汁 Lime Juice",
+     "parts": 0.5,
+     "abv": 0
+    },
+    {
+     "name": "可乐 Cola",
+     "parts": 3,
+     "abv": 0
+    }
+   ]
+  },
+  {
+   "id": "tequila-sunrise",
+   "name_en": "Tequila Sunrise",
+   "name_zh": "龙舌兰日出",
+   "category": "Tequila 龙舌兰",
+   "accent": "#e8843a",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/tequila-sunrise.jpg",
+   "glass": "Highball 高杯",
+   "garnish": "橙片 + 樱桃",
+   "method": "直接 Build",
+   "notes": "龙舌兰+橙汁，石榴糖浆沉底形成日出渐层。",
+   "dilution": 0.2,
+   "ingredients": [
+    {
+     "name": "龙舌兰 Tequila",
+     "parts": 3,
+     "abv": 40
+    },
+    {
+     "name": "鲜橙汁 Orange Juice",
+     "parts": 6,
+     "abv": 0
+    },
+    {
+     "name": "石榴糖浆 Grenadine",
+     "parts": 0.75,
+     "abv": 0
+    }
+   ]
+  },
+  {
+   "id": "pina-colada",
+   "name_en": "Piña Colada",
+   "name_zh": "椰林飘香",
+   "category": "Rum 朗姆",
+   "accent": "#f2e6c2",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/pina-colada.jpg",
+   "glass": "Hurricane 飓风杯",
+   "garnish": "菠萝片 + 樱桃",
+   "method": "搅拌 Blend",
+   "notes": "朗姆+椰奶+菠萝，波多黎各的甜蜜海风。",
+   "dilution": 1.2,
+   "ingredients": [
+    {
+     "name": "白朗姆 White Rum",
+     "parts": 2,
+     "abv": 40
+    },
+    {
+     "name": "椰奶 Coconut Cream",
+     "parts": 1.5,
+     "abv": 0
+    },
+    {
+     "name": "菠萝汁 Pineapple Juice",
+     "parts": 1.5,
+     "abv": 0
+    }
+   ]
+  },
+  {
+   "id": "whiskey-sour",
+   "name_en": "Whiskey Sour",
+   "name_zh": "威士忌酸酒",
+   "category": "Whiskey 威士忌",
+   "accent": "#e8c66b",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/whiskey-sour.jpg",
+   "glass": "Sour 酸酒杯",
+   "garnish": "柠檬片 + 樱桃 + 苦精点缀",
+   "method": "摇和 Shake",
+   "notes": "酸甜平衡，加蛋清干摇打出绵密泡沫，是经典/IBA 标准做法。",
+   "dilution": 0.8,
+   "ingredients": [
+    {
+     "name": "波本威士忌 Bourbon",
+     "parts": 2,
+     "abv": 40
+    },
+    {
+     "name": "鲜柠檬汁 Lemon Juice",
+     "parts": 1,
+     "abv": 0
+    },
+    {
+     "name": "糖浆 Sugar Syrup",
+     "parts": 0.75,
+     "abv": 0
+    },
+    {
+     "name": "蛋清 Egg White",
+     "parts": 1,
+     "abv": 0
+    }
+   ]
+  },
+  {
+   "id": "mojito",
+   "name_en": "Mojito",
+   "name_zh": "莫吉托",
+   "category": "Rum 朗姆",
+   "accent": "#8fbf6f",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/mojito.jpg",
+   "glass": "Highball 高杯",
+   "garnish": "薄荷枝 + 青柠角",
+   "method": "捣压 Build",
+   "notes": "薄荷与青柠的清爽清风，古巴国饮。",
+   "dilution": 0.3,
+   "ingredients": [
+    {
+     "name": "白朗姆 White Rum",
+     "parts": 4,
+     "abv": 40
+    },
+    {
+     "name": "鲜青柠汁 Lime Juice",
+     "parts": 1.5,
+     "abv": 0
+    },
+    {
+     "name": "糖浆 Sugar Syrup",
+     "parts": 1,
+     "abv": 0
+    },
+    {
+     "name": "苏打水 Soda",
+     "parts": 4,
+     "abv": 0
+    }
+   ]
+  },
+  {
+   "id": "long-island",
+   "name_en": "Long Island Iced Tea",
+   "name_zh": "长岛冰茶",
+   "category": "Spirit-Heavy 烈酒合集",
+   "accent": "#c9a24a",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/long-island.jpg",
+   "glass": "Highball 高杯",
+   "garnish": "柠檬片",
+   "method": "摇和+可乐 Top",
+   "notes": "五种烈酒合体却喝着像冰茶，隐藏的高酒精度。",
+   "dilution": 0.3,
+   "ingredients": [
+    {
+     "name": "伏特加 Vodka",
+     "parts": 0.5,
+     "abv": 40
+    },
+    {
+     "name": "金酒 Gin",
+     "parts": 0.5,
+     "abv": 40
+    },
+    {
+     "name": "白朗姆 White Rum",
+     "parts": 0.5,
+     "abv": 40
+    },
+    {
+     "name": "龙舌兰 Tequila",
+     "parts": 0.5,
+     "abv": 40
+    },
+    {
+     "name": "君度橙酒 Triple Sec",
+     "parts": 0.5,
+     "abv": 40
+    },
+    {
+     "name": "柠檬汁+糖浆 Sour Mix",
+     "parts": 1.5,
+     "abv": 0
+    },
+    {
+     "name": "可乐 Cola",
+     "parts": 2,
+     "abv": 0
+    }
+   ]
+  },
+  {
+   "id": "negroni",
+   "name_en": "Negroni",
+   "name_zh": "尼格罗尼",
+   "category": "Gin 金酒",
+   "accent": "#c0392b",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/negroni.jpg",
+   "glass": "Old Fashioned 古典杯",
+   "garnish": "橙皮卷",
+   "method": "搅拌 Stir",
+   "notes": "金酒、金巴利、红味美思 1:1:1，苦甜交锋。",
+   "dilution": 1.2,
+   "ingredients": [
+    {
+     "name": "金酒 Gin",
+     "parts": 1,
+     "abv": 40
+    },
+    {
+     "name": "金巴利 Campari",
+     "parts": 1,
+     "abv": 25
+    },
+    {
+     "name": "红味美思 Sweet Vermouth",
+     "parts": 1,
+     "abv": 16
+    }
+   ]
+  },
+  {
+   "id": "espresso-martini",
+   "name_en": "Espresso Martini",
+   "name_zh": "意式浓缩马天尼",
+   "category": "Vodka 伏特加",
+   "accent": "#4a2c1a",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/espresso-martini.jpg",
+   "glass": "Martini 马天尼杯",
+   "garnish": "3 颗咖啡豆",
+   "method": "摇和 Shake",
+   "notes": "咖啡与伏特加的提神组合，绵密泡沫是标配。",
+   "dilution": 0.6,
+   "ingredients": [
+    {
+     "name": "伏特加 Vodka",
+     "parts": 1.5,
+     "abv": 40
+    },
+    {
+     "name": "咖啡利口酒 Coffee Liqueur",
+     "parts": 1,
+     "abv": 20
+    },
+    {
+     "name": "浓缩咖啡 Espresso",
+     "parts": 1,
+     "abv": 0
+    }
+   ]
+  },
+  {
+   "id": "white-russian",
+   "name_en": "White Russian",
+   "name_zh": "白俄罗斯",
+   "category": "Vodka 伏特加",
+   "accent": "#e8dcc0",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/white-russian.jpg",
+   "glass": "Old Fashioned 古典杯",
+   "garnish": "无（可撒可可粉）",
+   "method": "直接 Build",
+   "notes": "《谋杀绿脚趾》同款，伏特加+咖啡利口酒+奶油的丝滑甜饮。",
+   "dilution": 0.3,
+   "ingredients": [
+    {
+     "name": "伏特加 Vodka",
+     "parts": 2,
+     "abv": 40
+    },
+    {
+     "name": "咖啡利口酒 Coffee Liqueur",
+     "parts": 1,
+     "abv": 20
+    },
+    {
+     "name": "鲜奶油 Fresh Cream",
+     "parts": 1.5,
+     "abv": 0
+    }
+   ]
+  },
+  {
+   "id": "margarita",
+   "name_en": "Margarita",
+   "name_zh": "玛格丽特",
+   "category": "Tequila 龙舌兰",
+   "accent": "#e0b84a",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/margarita.jpg",
+   "glass": "Coupette 碟形杯",
+   "garnish": "盐口杯 + 青柠角",
+   "method": "摇和 Shake",
+   "notes": "咸甜平衡的标杆，杯口盐边是灵魂。",
+   "dilution": 0.8,
+   "ingredients": [
+    {
+     "name": "龙舌兰 Tequila",
+     "parts": 2,
+     "abv": 40
+    },
+    {
+     "name": "君度橙酒 Triple Sec",
+     "parts": 1,
+     "abv": 40
+    },
+    {
+     "name": "鲜青柠汁 Lime Juice",
+     "parts": 1,
+     "abv": 0
+    }
+   ]
+  },
+  {
+   "id": "sidecar",
+   "name_en": "Sidecar",
+   "name_zh": "边车",
+   "category": "Brandy 白兰地",
+   "accent": "#e0a83a",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/sidecar.jpg",
+   "glass": "Coupe 鸡尾酒杯",
+   "garnish": "糖口杯 + 柠檬皮",
+   "method": "摇和 Shake",
+   "notes": "干邑与橙酒的优雅邂逅，平衡甜酸。",
+   "dilution": 0.8,
+   "ingredients": [
+    {
+     "name": "干邑白兰地 Cognac",
+     "parts": 2,
+     "abv": 40
+    },
+    {
+     "name": "君度橙酒 Triple Sec",
+     "parts": 1,
+     "abv": 40
+    },
+    {
+     "name": "鲜柠檬汁 Lemon Juice",
+     "parts": 1,
+     "abv": 0
+    }
+   ]
+  },
+  {
+   "id": "b52",
+   "name_en": "B-52",
+   "name_zh": "B52 轰炸机",
+   "category": "Shot 子弹杯",
+   "accent": "#c98a3a",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/b52.jpg",
+   "glass": "Shot 子弹杯",
+   "garnish": "可点燃上桌",
+   "method": "分层 Layer",
+   "notes": "三层利口酒分层射击杯，常点燃火焰上桌。",
+   "dilution": 0,
+   "ingredients": [
+    {
+     "name": "咖啡利口酒 Coffee Liqueur",
+     "parts": 1,
+     "abv": 20
+    },
+    {
+     "name": "百利甜酒 Baileys",
+     "parts": 1,
+     "abv": 17
+    },
+    {
+     "name": "金万利 Grand Marnier",
+     "parts": 1,
+     "abv": 40
+    }
+   ]
+  },
+  {
+   "id": "godfather",
+   "name_en": "Godfather",
+   "name_zh": "教父",
+   "category": "Whisky 威士忌",
+   "accent": "#a9743a",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/godfather.jpg",
+   "glass": "Old Fashioned 古典杯",
+   "garnish": "柠檬皮（可选）",
+   "method": "搅拌 Stir",
+   "notes": "苏格兰威士忌与杏仁利口酒的硬核组合，与电影《教父》同名。",
+   "dilution": 1.2,
+   "ingredients": [
+    {
+     "name": "苏格兰威士忌 Scotch",
+     "parts": 2,
+     "abv": 40
+    },
+    {
+     "name": "杏仁利口酒 Amaretto",
+     "parts": 1,
+     "abv": 28
+    }
+   ]
+  },
+  {
+   "id": "orgasm",
+   "name_en": "Orgasm",
+   "name_zh": "高潮",
+   "category": "Liqueur 利口酒",
+   "accent": "#c98a5a",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/orgasm.jpg",
+   "glass": "Coupe 鸡尾酒杯",
+   "garnish": "无",
+   "method": "摇和/分层 Shake",
+   "notes": "伏特加+杏仁+咖啡利口酒，顺滑甜润的小杯饮。",
+   "dilution": 0,
+   "ingredients": [
+    {
+     "name": "伏特加 Vodka",
+     "parts": 1,
+     "abv": 40
+    },
+    {
+     "name": "杏仁利口酒 Amaretto",
+     "parts": 1,
+     "abv": 28
+    },
+    {
+     "name": "咖啡利口酒 Coffee Liqueur",
+     "parts": 1,
+     "abv": 20
+    }
+   ]
+  },
+  {
+   "id": "black-russian",
+   "name_en": "Black Russian",
+   "name_zh": "黑俄罗斯",
+   "category": "Vodka 伏特加",
+   "accent": "#3a241a",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/black-russian.jpg",
+   "glass": "Old Fashioned 古典杯",
+   "garnish": "无",
+   "method": "直接 Build",
+   "notes": "白俄罗斯去掉奶油版，伏特加与咖啡利口酒的浓醇。",
+   "dilution": 0.3,
+   "ingredients": [
+    {
+     "name": "伏特加 Vodka",
+     "parts": 2,
+     "abv": 40
+    },
+    {
+     "name": "咖啡利口酒 Coffee Liqueur",
+     "parts": 1,
+     "abv": 20
+    }
+   ]
+  },
+  {
+   "id": "dry-martini",
+   "name_en": "Dry Martini",
+   "name_zh": "干马天尼",
+   "category": "Gin 金酒",
+   "accent": "#cfd6cf",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/dry-martini.jpg",
+   "glass": "Martini 马天尼杯",
+   "garnish": "橄榄 / 柠檬皮",
+   "method": "搅拌 Stir",
+   "notes": "鸡尾酒之王，越干越硬核，比例自由度高。",
+   "dilution": 1.0,
+   "ingredients": [
+    {
+     "name": "金酒 Gin",
+     "parts": 6,
+     "abv": 40
+    },
+    {
+     "name": "干味美思 Dry Vermouth",
+     "parts": 1,
+     "abv": 15
+    }
+   ]
+  }
+ ]
+}

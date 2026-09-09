@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>周六的Cocktail Menu</title>
+<style>
+  :root{
+    --bg1:#15110d; --bg2:#241a12; --card:#1f1812; --card2:#2a2018;
+    --ink:#f3ece1; --ink-dim:#b9ab97; --line:rgba(255,255,255,.08);
+    --gold:#d8b25e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, #3a2a18 0%, transparent 60%),
+      radial-gradient(900px 500px at 0% 110%, #2a1c30 0%, transparent 55%),
+      linear-gradient(160deg,var(--bg1),var(--bg2));
+    color:var(--ink);
+    min-height:100vh;
+    padding:48px 20px 64px;
+  }
+  .wrap{max-width:1180px;margin:0 auto;}
+  header.page{text-align:center;margin-bottom:40px;}
+  header.page h1{
+    font-size:clamp(28px,5vw,46px);
+    letter-spacing:.06em;font-weight:800;
+    background:linear-gradient(90deg,#f3d99a,#d8b25e,#f3d99a);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  header.page p{color:var(--ink-dim);margin-top:10px;font-size:15px;letter-spacing:.04em;}
+  header.page .subtitle{
+    font-size:17px;font-style:italic;letter-spacing:.12em;color:var(--accent,#e8b84b);
+    margin-top:8px;font-weight:600;
+  }
+  .grid{
+    display:grid;gap:26px;
+    grid-template-columns:repeat(auto-fill,minmax(310px,1fr));
+  }
+  .card{
+    background:linear-gradient(180deg,var(--card),var(--card2));
+    border:1px solid var(--line);
+    border-radius:18px;overflow:hidden;
+    box-shadow:0 18px 40px rgba(0,0,0,.45);
+    display:flex;flex-direction:column;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .card:hover{transform:translateY(-6px);box-shadow:0 26px 54px rgba(0,0,0,.55);}
+  .photo{position:relative;height:218px;background:#0d0a07;overflow:hidden;}
+  .photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  .photo .ph{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    color:var(--ink-dim);font-size:14px;letter-spacing:.1em;
+  }
+  .photo .phz{
+    font-size:22px;font-weight:700;color:rgba(255,255,255,.92);
+    letter-spacing:.06em;text-shadow:0 2px 8px rgba(0,0,0,.45);
+  }
+  .stripe{height:5px;width:100%;background:var(--accent);}
+  .body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:12px;flex:1;}
+  .title-row{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+  .names .en{font-size:21px;font-weight:700;line-height:1.15;}
+  .names .zh{font-size:14px;color:var(--ink-dim);margin-top:2px;letter-spacing:.05em;}
+  .abv{
+    text-align:center;flex:0 0 auto;
+    background:rgba(255,255,255,.05);border:1px solid var(--line);
+    border-radius:12px;padding:8px 12px;min-width:74px;
+  }
+  .abv b{display:block;font-size:22px;color:var(--accent);font-weight:800;line-height:1;}
+  .abv span{font-size:10px;color:var(--ink-dim);letter-spacing:.12em;}
+  .cat{
+    display:inline-block;font-size:11px;color:var(--accent);
+    border:1px solid var(--accent);border-radius:999px;
+    padding:3px 10px;letter-spacing:.06em;opacity:.9;
+  }
+  .ings{display:flex;flex-direction:column;gap:7px;margin-top:2px;}
+  .ing{display:flex;align-items:center;gap:10px;font-size:13px;}
+  .ing .n{flex:1;color:var(--ink);}
+  .ing .b{height:8px;border-radius:6px;background:var(--accent);opacity:.85;min-width:6px;}
+  .ing .p{font-variant-numeric:tabular-nums;color:var(--ink-dim);font-size:12px;min-width:42px;text-align:right;}
+  .meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--ink-dim);margin-top:2px;}
+  .meta span b{color:var(--ink);font-weight:600;}
+  .notes{font-size:12.5px;color:var(--ink-dim);line-height:1.5;border-top:1px dashed var(--line);padding-top:10px;margin-top:auto;}
+  footer.page{text-align:center;color:var(--ink-dim);font-size:12px;margin-top:46px;letter-spacing:.05em;}
+
+  /* 周六的秘密 · 交互卡片 */
+  .card.secret{
+    grid-column:1/-1;flex-direction:row;align-items:center;gap:22px;
+    padding:24px 28px;
+    background:linear-gradient(120deg,#241a12,#2c2118 55%,#1c2a24);
+    border:1px solid rgba(232,184,78,.35);
+  }
+  .card.secret .stripe{display:none;}
+  .secret-head{flex:1 1 auto;}
+  .secret-name{font-size:24px;font-weight:800;letter-spacing:.04em;
+    background:linear-gradient(90deg,#f3d99a,#d8b25e,#f3d99a);
+    -webkit-background-clip:text;background-clip:text;color:transparent;}
+  .secret-name span{display:block;font-size:12px;color:var(--ink-dim);font-weight:500;letter-spacing:.18em;margin-top:3px;-webkit-text-fill-color:var(--ink-dim);}
+  .secret-body{flex:2 1 auto;font-size:15px;color:var(--ink);}
+  .secret-hint{color:var(--ink-dim);}
+  .secret-msg b{color:var(--gold);}
+  .dice-btn{
+    flex:0 0 auto;cursor:pointer;border:none;border-radius:16px;
+    font-size:30px;padding:14px 22px;line-height:1;
+    background:linear-gradient(135deg,#e8b84b,#caa64f);color:#221a10;font-weight:800;
+    box-shadow:0 10px 26px rgba(232,184,78,.35);transition:transform .12s ease,filter .12s ease;
+  }
+  .dice-btn:active{transform:scale(.93);}
+  .dice-btn .dice-n{font-size:18px;margin-left:4px;font-family:inherit;}
+  .dice-btn.again{background:linear-gradient(135deg,#8a6f3a,#b8923f);color:#fff;font-size:18px;}
+  .secret-panel{margin-top:30px;}
+  .secret-cards{margin-top:16px;}
+  .secret-summary{
+    text-align:center;padding:22px;border-radius:16px;margin-bottom:18px;
+    background:linear-gradient(120deg,rgba(232,184,78,.14),rgba(232,184,78,.04));
+    border:1px solid rgba(232,184,78,.3);
+  }
+  .secret-title{font-size:22px;font-weight:800;color:var(--gold);}
+  .secret-abv{font-size:16px;margin-top:8px;color:var(--ink);}
+  .secret-abv b{font-size:28px;color:var(--gold);margin:0 4px;}
+  .secret-sub{font-size:13px;color:var(--ink-dim);margin-top:6px;}
+  /* 生成完成后（再听一个秘密）改为上下结构，避免竖版把提示语与按钮挤成两列 */
+  .card.secret.done{flex-direction:column;align-items:center;text-align:center;gap:14px;}
+  .card.secret.done .secret-head{text-align:center;}
+  .card.secret.done .secret-body{width:100%;text-align:center;font-size:16px;}
+  .card.secret.done .dice-btn{width:100%;max-width:360px;font-size:20px;padding:16px 22px;align-self:center;}
+  /* 窄屏（竖版手机）下秘密卡片始终竖排，提示语与按钮不再并排挤压 */
+  @media (max-width:560px){
+    .card.secret{flex-direction:column;align-items:stretch;text-align:center;gap:14px;}
+    .card.secret .secret-head{text-align:center;}
+    .card.secret .secret-body{text-align:center;}
+    .card.secret .dice-btn{width:100%;max-width:360px;align-self:center;font-size:22px;padding:16px 22px;}
+  }
+
+  /* 导览 · 索引 */
+  html{scroll-behavior:smooth;}
+  .menu-nav{
+    margin:0 auto 34px;max-width:1000px;
+    background:linear-gradient(180deg,var(--card),rgba(31,24,18,.5));
+    border:1px solid var(--line);border-radius:16px;
+    padding:18px 20px 20px;box-shadow:0 14px 34px rgba(0,0,0,.35);
+  }
+  .menu-nav .nav-title{
+    font-size:12px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--gold);font-weight:700;margin-bottom:13px;text-align:center;
+  }
+  .nav-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
+  .nav-chip{
+    text-decoration:none;font-size:14px;color:var(--ink);
+    border:1px solid rgba(216,178,94,.4);background:rgba(216,178,94,.07);
+    padding:7px 14px;border-radius:999px;transition:all .18s ease;white-space:nowrap;
+  }
+  .nav-chip:hover{background:rgba(216,178,94,.18);border-color:var(--gold);transform:translateY(-2px);color:#fff;}
+  .nav-chip.secret{background:rgba(232,184,78,.16);border-color:rgba(232,184,78,.6);color:#f3d99a;font-weight:600;}
+  .nav-chip.secret:hover{background:rgba(232,184,78,.3);}
+  /* 导览里的小狗动图：单独悬挂在「周六的秘密」按钮之前 */
+  .nav-dog{
+    display:inline-flex;align-items:center;justify-content:center;
+    text-decoration:none;cursor:pointer;line-height:0;
+    margin:0 2px;vertical-align:middle;
+  }
+  .nav-dog:hover{filter:brightness(1.18);}
+  .nav-dog img.pup{
+    width:42px;height:42px;object-fit:contain;background:transparent;
+    filter:drop-shadow(0 2px 5px rgba(0,0,0,.45));
+    animation:dogWag 2.6s ease-in-out infinite;
+    transform-origin:50% 90%;
+  }
+  @keyframes dogWag{
+    0%,100%{transform:rotate(-5deg);}
+    50%{transform:rotate(5deg);}
+  }
+  @media (prefers-reduced-motion:reduce){.nav-dog img.pup{animation:none;}}
+  .card{scroll-margin-top:16px;}
+  #secretCard{scroll-margin-top:16px;}
+  /* 悬浮「回到导览」按钮：滚动越过导览后出现，点击平滑回到导览 */
+  .to-nav-fab{
+    position:fixed;right:18px;bottom:18px;z-index:50;display:none;
+    align-items:center;gap:7px;cursor:pointer;border:none;border-radius:999px;
+    padding:13px 18px;font-size:14px;font-weight:700;
+    background:linear-gradient(135deg,#e8b84b,#caa64f);color:#221a10;
+    box-shadow:0 12px 28px rgba(232,184,78,.4);transition:transform .15s ease;
+  }
+  .to-nav-fab:active{transform:scale(.94);}
+  .to-nav-fab .ic{font-size:16px;line-height:1;}
+  @media (max-width:560px){
+    .to-nav-fab{right:14px;bottom:14px;padding:12px 15px;}
+  }
+
+  /* 副标题下的音乐播放按钮（仅音符图标）与纵向滚动歌词 */
+  .music{margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:12px;}
+  .music-btn{
+    display:inline-flex;align-items:center;gap:9px;cursor:pointer;
+    border:1px solid rgba(216,178,94,.55);background:rgba(216,178,94,.12);
+    color:var(--ink);border-radius:999px;padding:9px 18px;
+    font-size:14px;font-weight:600;letter-spacing:.05em;transition:all .18s ease;font-family:inherit;
+  }
+  .music-btn:hover{background:rgba(216,178,94,.22);border-color:var(--gold);transform:translateY(-2px);}
+  .music-btn .ic{font-size:17px;color:var(--gold);line-height:1;}
+  .music-btn.playing{background:rgba(216,178,94,.28);border-color:var(--gold);}
+  .music-btn.playing .ic{animation:musicSpin 2.4s linear infinite;}
+  @keyframes musicSpin{to{transform:rotate(360deg);}}
+  /* 纵向滚动歌词：固定高度窗口 + 上下渐隐遮罩；由 JS 按播放进度定位并高亮当前句，与音乐严格同步 */
+  .music-lyric{
+    position:relative;
+    width:min(440px,92vw);height:96px;overflow:hidden;margin-top:6px;text-align:center;
+    -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 18%,#000 82%,transparent 100%);
+    mask-image:linear-gradient(180deg,transparent 0,#000 18%,#000 82%,transparent 100%);
+  }
+  .music-lyric .lyric-track{
+    display:flex;flex-direction:column;gap:10px;
+    transition:transform .3s linear;will-change:transform;
+  }
+  .music-lyric .lyric-text{
+    color:var(--gold);font-size:15px;letter-spacing:.08em;line-height:1.45;
+    opacity:.4;transition:opacity .3s ease,color .3s ease;
+  }
+  .music-lyric .lyric-text.active{
+    opacity:1;color:#fff;font-weight:700;
+    text-shadow:0 0 10px rgba(232,184,75,.55);
+  }
+  @media (prefers-reduced-motion:reduce){
+    .music-lyric .lyric-track{transition:none;}
+    .music-lyric .lyric-text{transition:none;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="page">
+    <h1>周六的Cocktail Menu</h1>
+    
+    <div class="music"><button class="music-btn" id="musicBtn" type="button" aria-label="点击播放/暂停" title="点击播放/暂停"><span class="ic">♪</span></button><div class="music-lyric" id="musicLyric" aria-hidden="true"><div class="lyric-track"><div class="lyric-text" data-t="14.13">人有几多烦忧 才发酵出红酒</div><div class="lyric-text" data-t="21.14">入到口甘苦也被迫参透</div><div class="lyric-text" data-t="28.37">澎湃喝到醇厚 忘记了却还有</div><div class="lyric-text" data-t="35.73">愁绪到肚里伤春只会更悲秋</div><div class="lyric-text" data-t="42.92">麻醉得多长久 一清醒也颤抖</div><div class="lyric-text" data-t="49.79">逝去的伤口困在那樽口</div><div class="lyric-text" data-t="57.15">年少发泄过每滴愁 浓度就似烈酒</div><div class="lyric-text" data-t="64.12">味觉挥之不去你也得接受</div><div class="lyric-text" data-t="69.47">遗忘但怎么的失忆都记得起</div><div class="lyric-text" data-t="77.54">何尝又不想拥有撇脱那运气</div><div class="lyric-text" data-t="84.63">然而泪水哭不够那份量怎好好清理</div><div class="lyric-text" data-t="92.72">待你呕心沥血 喝够苦涩味</div><div class="lyric-text" data-t="98.07">难忘像清酒的清晰都记不起</div><div class="lyric-text" data-t="106.1">随年份几经蒸制看透了是非</div><div class="lyric-text" data-t="113.39">暴烈地吞风饮雨到现在懂饮酒的你</div><div class="lyric-text" data-t="121.46">洞察苦之美 痛苦记便记</div><div class="lyric-text" data-t="142.81">昂贵干邑如水 茶也清得如水</div><div class="lyric-text" data-t="150.15">是你的心境诱导你的嘴</div><div class="lyric-text" data-t="157.41">嫌弃你疼爱你是谁 如荷叶与露水</div><div class="lyric-text" data-t="164.32">就似酒精蒸发愧疚的眼泪</div><div class="lyric-text" data-t="169.81">遗忘但怎么的失忆都记得起</div><div class="lyric-text" data-t="177.87">何尝又不想拥有撇脱那运气</div><div class="lyric-text" data-t="184.92">然而泪水哭不够那份量怎好好清理</div><div class="lyric-text" data-t="193.01">待你呕心沥血 喝够苦涩味</div><div class="lyric-text" data-t="198.4">难忘像清酒的清晰都记不起</div><div class="lyric-text" data-t="206.49">随年份几经蒸制看透了是非</div><div class="lyric-text" data-t="213.62">暴烈地吞风饮雨到现在懂饮酒的你</div><div class="lyric-text" data-t="221.59">洞察苦之美 痛苦记便记</div><div class="lyric-text" data-t="236.52">轻轻清风中浅酌悲喜</div><div class="lyric-text" data-t="242.82">年份刚刚足够细味动人遗憾味</div></div></div><audio id="musicAudio" preload="none" loop src="assets/shangshanrujiu.mp3"></audio></div>
+  </header>
+  <nav class="menu-nav" id="menuNav">
+  <div class="nav-title">导览 · Index</div>
+  <div class="nav-chips">
+    <a class="nav-chip" href="#card-painkiller">止痛药</a>
+    <a class="nav-chip" href="#card-gin-tonic">金汤力</a>
+    <a class="nav-chip" href="#card-tom-collins">汤姆柯林斯</a>
+    <a class="nav-chip" href="#card-cuba-libre">自由古巴</a>
+    <a class="nav-chip" href="#card-tequila-sunrise">龙舌兰日出</a>
+    <a class="nav-chip" href="#card-pina-colada">椰林飘香</a>
+    <a class="nav-chip" href="#card-whiskey-sour">威士忌酸酒</a>
+    <a class="nav-chip" href="#card-mojito">莫吉托</a>
+    <a class="nav-chip" href="#card-long-island">长岛冰茶</a>
+    <a class="nav-chip" href="#card-negroni">尼格罗尼</a>
+    <a class="nav-chip" href="#card-espresso-martini">意式浓缩马天尼</a>
+    <a class="nav-chip" href="#card-white-russian">白俄罗斯</a>
+    <a class="nav-chip" href="#card-margarita">玛格丽特</a>
+    <a class="nav-chip" href="#card-sidecar">边车</a>
+    <a class="nav-chip" href="#card-b52">B52 轰炸机</a>
+    <a class="nav-chip" href="#card-godfather">教父</a>
+    <a class="nav-chip" href="#card-orgasm">高潮</a>
+    <a class="nav-chip" href="#card-black-russian">黑俄罗斯</a>
+    <a class="nav-chip" href="#card-dry-martini">干马天尼</a>
+    <a class="nav-dog" href="#secretCard" title="周六 · 马尔济斯 🐾"><img class="pup" src="assets/dog_xiaobai.gif" alt="小狗动图"></a>
+  </div>
+</nav>
+  <div class="grid">
+<div class="card" id="card-painkiller" style="--accent:#e8b54a">
+  <div class="photo"><img id="img-painkiller" src="assets/painkiller.jpg" alt="Painkiller"></div>
+  <div class="stripe" style="background:#e8b54a"></div>
+  <div class="body">
+    <div class="title-row">
+      <div class="names"><div class="en">Painkiller</div><div class="zh">止痛药</div></div>
+      <div class="abv"><b>9.8</b><span>% ABV 度数</span></div>
+    </div>
+    <span class="cat">Rum 朗姆</span>
+    <div class="ings"><div class="ing"><span class="n">黑/白朗姆 Rum</span><span class="b" style="width:60px"></span><span class="p">2.0 份</span></div>
+<div class="ing"><span class="n">菠萝汁 Pineapple Juice</span><span class="b" style="width:120px"></span><span class="p">4.0 份</span></div>
+<div class="ing"><span class="n">鲜橙汁 Orange Juice</span><span class="b" style="width:30px"></span><span class="p">1.0 份</span></div>
+<div class="ing"><span class="n">椰浆 Cream of Coconut</span><span class="b" style="width:30px"></span><span class="p">1.0 份</span></div></div>
+    <div class="meta">
+      <span>杯型 <b>Hurricane 飓风杯</b></span>
+      <span>装饰 <b>肉豆蔻粉 + 菠萝角</b></span>
+      <span>调制 <b>摇和/直接 Build</b></span>
+    </div>
+    <div class="notes">热带朗姆饮品，椰香与菠萝橙汁的海岛风味。</div>
+  </div>
+</div>
+
+<div class="card" id="card-gin-tonic" style="--accent:#cfe3c0">
+  <div class="photo"><img id="img-gin-tonic" src="assets/gin-tonic.jpg" alt="Gin &amp; Tonic"></div>
+  <div class="stripe" style="background:#cfe3c0"></div>
+  <div class="body">
+    <div class="title-row">
+      <div class="names"><div class="en">Gin &amp; Tonic</div><div class="zh">金汤力</div></div>
+      <div class="abv"><b>10.8</b><span>% ABV 度数</span></div>
+    </div>
+    <span class="cat">Gin 金酒</span>
+    <div class="ings"><div class="ing"><span class="n">金酒 Gin</span><span class="b" style="width:48px"></span><span class="p">1.0 份</span></div>
+<div class="ing"><span class="n">汤力水 Tonic Water</span><span class="b" style="width:120px"></span><span class="p">2.5 份</span></div></div>
+    <div class="meta">
+      <span>杯型 <b>Highball 高杯</b></span>
+      <span>装饰 <b>青柠角 / 黄瓜片</b></span>
+      <span>调制 <b>直接 Build</b></span>
+    </div>
+    <div class="notes">最经典的金酒长饮，奎宁的微苦回甘。</div>
+  </div>
+</div>
+
+<div class="card" id="card-tom-collins" style="--accent:#cfe8a0">
+  <div class="photo"><img id="img-tom-collins" src="assets/tom-collins.jpg" alt="Tom Collins"></div>
+  <div class="stripe" style="background:#cfe8a0"></div>
+  <div class="body">
+    <div class="title-row">
+      <div class="names"><div class="en">Tom Collins</div><div class="zh">汤姆柯林斯</div></div>
+      <div class="abv"><b>11.0</b><span>% ABV 度数</span></div>
+    </div>
+    <span class="cat">Gin 金酒</span>
+    <div class="ings"><div class="ing"><span class="n">金酒 Gin</span><span class="b" style="width:80px"></span><span class="p">2.0 份</span></div>
+<div class="ing"><span class="n">鲜柠檬汁 Lemon Juice</span><span class="b" style="width:40px"></span><span class="p">1.0 份</span></div>
+<div class="ing"><span class="n">糖浆 Sugar Syrup</span><span class="b" style="width:40px"></span><span class="p">1.0 份</span></div>
+<div class="ing"><span class="n">苏打水 Soda</span><span class="b" style="width:120px"></span><span class="p">3.0 份</span></div></div>
+    <div class="meta">
+      <span>杯型 <b>Highball 高杯</b></span>
+      <span>装饰 <b>柠檬片 + 樱桃</b></span>
+      <span>调制 <b>摇和+注满 Build</b></span>
+    </div>
+    <div class="notes">金酒版柠檬汽水，长饮清爽。</div>
+  </div>
+</div>
+
+<div class="card" id="card-cuba-libre" style="--accent:#8a5a2a">
+  <div class="photo"><img id="img-cuba-libre" src="assets/cuba-libre.jpg" alt="Cuba Libre"></div>
+  <div class="stripe" style="background:#8a5a2a"></div>
+  <div class="body">
+    <div class="title-row">
+      <div class="names"><div class="en">Cuba Libre</div><div class="zh">自由古巴</div></div>
+      <div class="abv"><b>11.5</b><span>% ABV 度数</span></div>
+    </div>
+    <span class="cat">Rum 朗姆</span>
+    <div class="ings"><div class="ing"><span class="n">白朗姆 White Rum</span><span class="b" style="width:60px"></span><span class="p">1.5 份</span></div>
+<div class="ing"><span class="n">鲜青柠汁 Lime Juice</span><span class="b" style="width:20px"></span><span class="p">0.5 份</span></div>
+<div class="ing"><span class="n">可乐 Cola</span><span class="b" style="width:120px"></span><span class="p">3.0 份</span></div></div>
+    <div class="meta">
+      <span>杯型 <b>Highball 高杯</b></span>
+      <span>装饰 <b>青柠角</b></span>
+      <span>调制 <b>直接 Build</b></span>
+    </div>
+    <div class="notes">朗姆+可乐+青柠，古巴自由之名，轻松长饮。</div>
+  </div>
+</div>
+
+<div class="card" id="card-tequila-sunrise" style="--accent:#e8843a">
+  <div class="photo"><img id="img-tequila-sunrise" src="assets/tequila-sunrise.jpg" alt="Tequila Sunrise"></div>
+  <div class="stripe" style="background:#e8843a"></div>
+  <div class="body">
+    <div class="title-row">
+      <div class="names"><div class="en">Tequila Sunrise</div><div class="zh">龙舌兰日出</div></div>
+      <div class="abv"><b>12.1</b><span>% ABV 度数</span></div>
+    </div>
+    <span class="cat">Tequila 龙舌兰</span>
+    <div class="ings"><div class="ing"><span class="n">龙舌兰 Tequila</span><span class="b" style="width:60px"></span><span class="p">3.0 份</span></div>
+<div class="ing"><span class="n">鲜橙汁 Orange Juice</span><span class="b" style="width:120px"></span><span class="p">6.0 份</span></div>
+<div class="ing"><span class="n">石榴糖浆 Grenadine</span><span class="b" style="width:15px"></span><span class="p">0.75 份</span></div></div>
+    <div class="meta">
+      <span>杯型 <b>Highball 高杯</b></span>
+      <span>装饰 <b>橙片 + 樱桃</b></span>
+      <span>调制 <b>直接 Build</b></span>
+    </div>
+    <div class="notes">龙舌兰+橙汁，石榴糖浆沉底形成日出渐层。</div>
+  </div>
+</div>
+
+<div class="card" id="card-pina-colada" style="--accent:#f2e6c2">
+  <div class="photo"><img id="img-pina-colada" src="assets/pina-colada.jpg" alt="Piña Colada"></div>
+  <div class="stripe" style="background:#f2e6c2"></div>
+  <div class="body">
+    <div class="title-row">
+      <div class="names"><div class="en">Piña Colada</div><div class="zh">椰林飘香</div></div>
+      <div class="abv"><b>12.9</b><span>% ABV 度数</span></div>
+    </div>
+    <span class="cat">Rum 朗姆</span>
+    <div class="ings"><div class="ing"><span class="n">白朗姆 White Rum</span><span class="b" style="width:120px"></span><span class="p">2.0 份</span></div>
+<div class="ing"><span class="n">椰奶 Coconut Cream</span><span class="b" style="width:90px"></span><span class="p">1.5 份</span></div>
+<div class="ing"><span class="n">菠萝汁 Pineapple Juice</span><span class="b" style="width:90px"></span><span class="p">1.5 份</span></div></div>
+    <div class="meta">
+      <span>杯型 <b>Hurricane 飓风杯</b></span>
+      <span>装饰 <b>菠萝片 + 樱桃</b></span>
+      <span>调制 <b>搅拌 Blend</b></span>
+    </div>
+    <div class="notes">朗姆+椰奶+菠萝，波多黎各的甜蜜海风。</div>
+  </div>
+</div>
+
+<div class="card" id="card-whiskey-sour" style="--accent:#e8c66b">
+  <div class="photo"><img id="img-whiskey-sour" src="assets/whiskey-sour.jpg" alt="Whiskey Sour"></div>
+  <div class="stripe" style="background:#e8c66b"></div>
+  <div class="body">
+    <div class="title-row">
+      <div class="names"><div class="en">Whiskey Sour</div><div class="zh">威士忌酸酒</div></div>
+      <div class="abv"><b>14.4</b><span>% ABV 度数</span></div>
+    </div>
+    <span class="cat">Whiskey 威士忌</span>
+    <div class="ings"><div class="ing"><span class="n">波本威士忌 Bourbon</span><span class="b" style="width:120px"></span><span class="p">2.0 份</span></div>
+<div class="ing"><span class="n">鲜柠檬汁 Lemon Juice</span><span class="b" style="width:60px"></span><span class="p">1.0 份</span></div>
+<div class="ing"><span class="n">糖浆 Sugar Syrup</span><span class="b" style="width:45px"></span><span class="p">0.75 份</span></div>
+<div class="ing"><span class="n">蛋清 Egg White</span><span class="b" style="width:60px"></span><span class="p">1.0 份</span></div></div>
+    <div class="meta">
+      <span>杯型 <b>Sour 酸酒杯</b></span>
+      <span>装饰 <b>柠檬片 + 樱桃 + 苦精点缀</b></span>
+      <span>调制 <b>摇和 Shake</b></span>
+    </div>
+    <div class="notes">酸甜平衡，加蛋清干摇打出绵密泡沫，是经典/IBA 标准做法。</div>
+  </div>
+</div>
+
+<div class="card" id="card-mojito" style="--accent:#8fbf6f">
+  <div class="photo"><img id="img-mojito" src="assets/mojito.jpg" alt="Mojito"></div>
+  <div class="stripe" style="background:#8fbf6f"></div>
+  <div class="body">
+    <div class="title-row">
+      <div class="names"><div class="en">Mojito</div><div class="zh">莫吉托</div></div>
+      <div class="abv"><b>14.8</b><span>% ABV 度数</span></div>
+    </div>
+    <span class="cat">Rum 朗姆</span>
+    <div class="ings"><div class="ing"><span class="n">白朗姆 White Rum</span><span class="b" style="width:120px"></span><span class="p">4.0 份</span></div>
+<div class="ing"><span class="n">鲜青柠汁 Lime Juice</span><span class="b" style="width:45px"></span><span class="p">1.5 份</span></div>
+<div class="ing"><span class="n">糖浆 Sugar Syrup</span><span class="b" style="width:30px"></span><span class="p">1.0 份</span></div>
+<div class="ing"><span class="n">苏打水 Soda</span><span class="b" style="width:120px"></span><span class="p">4.0 份</span></div></div>
+    <div class="meta">
+      <span>杯型 <b>Highball 高杯</b></span>
+      <span>装饰 <b>薄荷枝 + 青柠角</b></span>
+      <span>调制 <b>捣压 Build</b></span>
+    </div>
+    <div class="notes">薄荷与青柠的清爽清风，古巴国饮。</div>
+  </div>
+</div>
+
+<div class="card" id="card-long-island" style="--accent:#c9a24a">
+  <div class="photo"><img id="img-long-island" src="assets/long-island.jpg" alt="Long Island Iced Tea"></div>
+  <div class="stripe" style="background:#c9a24a"></div>
+  <div class="body">
+    <div class="title-row">
+      <div class="names"><div class="en">Long Island Iced Tea</div><div class="zh">长岛冰茶</div></div>
+      <div class="abv"><b>15.9</b><span>% ABV 度数</span></div>
+    </div>
+    <span class="cat">Spirit-Heavy 烈酒合集</span>
+    <div class="ings"><div class="ing"><span class="n">伏特加 Vodka</span><span class="b" style="width:30px"></span><span class="p">0.5 份</span></div>
+<div class="ing"><span class="n">金酒 Gin</span><span class="b" style="width:30px"></span><span class="p">0.5 份</span></div>
+<div class="ing"><span class="n">白朗姆 White Rum</span><span class="b" style="width:30px"></span><span class="p">0.5 份</span></div>
+<div class="ing"><span class="n">龙舌兰 Tequila</span><span class="b" style="width:30px"></span><span class="p">0.5 份</span></div>
+<div class="ing"><span class="n">君度橙酒 Triple Sec</span><span class="b" style="width:30px"></span><span class="p">0.5 份</span></div>
+<div class="ing"><span class="n">柠檬汁+糖浆 Sour Mix</span><span class="b" style="width:90px"></span><span class="p">1.5 份</span></div>
+<div class="ing"><span class="n">可乐 Cola</span><span class="b" style="width:120px"></span><span class="p">2.0 份</span></div></div>
+    <div class="meta">
+      <span>杯型 <b>Highball 高杯</b></span>
+      <span>装饰 <b>柠檬片</b></span>
+      <span>调制 <b>摇和+可乐 Top</b></span>
+    </div>
+    <div class="notes">五种烈酒合体却喝着像冰茶，隐藏的高酒精度。</div>
+  </div>
+</div>
+
+<div class="card" id="card-negroni" style="--accent:#c0392b">
+  <div class="photo"><img id="img-negroni" src="assets/negroni.jpg" alt="Negroni"></div>
+  <div class="stripe" style="background:#c0392b"></div>
+  <div class="body">
+    <div class="title-row">
+      <div class="names"><div class="en">Negroni</div><div class="zh">尼格罗尼</div></div>
+      <div class="abv"><b>19.3</b><span>% ABV 度数</span></div>
+    </div>
+    <span class="cat">Gin 金酒</span>
+    <div class="ings"><div class="ing"><span class="n">金酒 Gin</span><span class="b" style="width:120px"></span><span class="p">1.0 份</span></div>
+<div class="ing"><span class="n">金巴利 Campari</span><span class="b" style="width:120px"></span><span class="p">1.0 份</span></div>
+<div class="ing"><span class="n">红味美思 Sweet Vermouth</span><span class="b" style="width:120px"></span><span class="p">1.0 份</span></div></div>
+    <div class="meta">
+      <span>杯型 <b>Old Fashioned 古典杯</b></span>
+      <span>装饰 <b>橙皮卷</b></span>
+      <span>调制 <b>搅拌 Stir</b></span>
+    </div>
+    <div class="notes">金酒、金巴利、红味美思 1:1:1，苦甜交锋。</div>
+  </div>
+</div>
+
+<div class="card" id="card-espresso-martini" style="--accent:#4a2c1a">
+  <div class="photo"><img id="img-espresso-martini" src="assets/espresso-martini.jpg" alt="Espresso Martini"></div>
+  <div class="stripe" style="background:#4a2c1a"></div>
+  <div class="body">
+    <div class="title-row">
+      <div class="names"><div class="en">Espresso Martini</div><div class="zh">意式浓缩马天尼</div></div>
+      <div class="abv"><b>19.5</b><span>% ABV 度数</span></div>
+    </div>
+    <span class="cat">Vodka 伏特加</span>
+    <div class="ings"><div class="ing"><span class="n">伏特加 Vodka</span><span class="b" style="width:120px"></span><span class="p">1.5 份</span></div>
+<div class="ing"><span class="n">咖啡利口酒 Coffee Liqueur</span><span class="b" style="width:80px"></span><span class="p">1.0 份</span></div>
+<div class="ing"><span class="n">浓缩咖啡 Espresso</span><span class="b" style="width:80px"></span><span class="p">1.0 份</span></div></div>
+    <div class="meta">
+      <span>杯型 <b>Martini 马天尼杯</b></span>
+      <span>装饰 <b>3 颗咖啡豆</b></span>
+      <span>调制 <b>摇和 Shake</b></span>
+    </div>
+    <div class="notes">咖啡与伏特加的提神组合，绵密泡沫是标配。</div>
+  </div>
+</div>
+
+<div class="card" id="card-white-russian" style="--accent:#e8dcc0">
+  <div class="photo"><img id="img-white-russian" src="assets/white-russian.jpg" alt="White Russian"></div>
+  <div class="stripe" style="background:#e8dcc0"></div>
+  <div class="body">
+    <div class="title-row">
+      <div class="names"><div class="en">White Russian</div><div class="zh">白俄罗斯</div></div>
+      <div class="abv"><b>20.8</b><span>% ABV 度数</span></div>
+    </div>
+    <span class="cat">Vodka 伏特加</span>
+    <div class="ings"><div class="ing"><span class="n">伏特加 Vodka</span><span class="b" style="width:120px"></span><span class="p">2.0 份</span></div>
+<div class="ing"><span class="n">咖啡利口酒 Coffee Liqueur</span><span class="b" style="width:60px"></span><span class="p">1.0 份</span></div>
+<div class="ing"><span class="n">鲜奶油 Fresh Cream</span><span class="b" style="width:90px"></span><span class="p">1.5 份</span></div></div>
+    <div class="meta">
+      <span>杯型 <b>Old Fashioned 古典杯</b></span>
+      <span>装饰 <b>无（可撒可可粉）</b></span>
+      <span>调制 <b>直接 Build</b></span>
+    </div>
+    <div class="notes">《谋杀绿脚趾》同款，伏特加+咖啡利口酒+奶油的丝滑甜饮。</div>
+  </div>
+</div>
+
+<div class="card" id="card-margarita" style="--accent:#e0b84a">
+  <div class="photo"><img id="img-margarita" src="assets/margarita.jpg" alt="Margarita"></div>
+  <div class="stripe" style="background:#e0b84a"></div>
+  <div class="body">
+    <div class="title-row">
+      <div class="names"><div class="en">Margarita</div><div class="zh">玛格丽特</div></div>
+      <div class="abv"><b>25.0</b><span>% ABV 度数</span></div>
+    </div>
+    <span class="cat">Tequila 龙舌兰</span>
+    <div class="ings"><div class="ing"><span class="n">龙舌兰 Tequila</span><span class="b" style="width:120px"></span><span class="p">2.0 份</span></div>
+<div class="ing"><span class="n">君度橙酒 Triple Sec</span><span class="b" style="width:60px"></span><span class="p">1.0 份</span></div>
+<div class="ing"><span class="n">鲜青柠汁 Lime Juice</span><span class="b" style="width:60px"></span><span class="p">1.0 份</span></div></div>
+    <div class="meta">
+      <span>杯型 <b>Coupette 碟形杯</b></span>
+      <span>装饰 <b>盐口杯 + 青柠角</b></span>
+      <span>调制 <b>摇和 Shake</b></span>
+    </div>
+    <div class="notes">咸甜平衡的标杆，杯口盐边是灵魂。</div>
+  </div>
+</div>
+
+<div class="card" id="card-sidecar" style="--accent:#e0a83a">
+  <div class="photo"><img id="img-sidecar" src="assets/sidecar.jpg" alt="Sidecar"></div>
+  <div class="stripe" style="background:#e0a83a"></div>
+  <div class="body">
+    <div class="title-row">
+      <div class="names"><div class="en">Sidecar</div><div class="zh">边车</div></div>
+      <div class="abv"><b>25.0</b><span>% ABV 度数</span></div>
+    </div>
+    <span class="cat">Brandy 白兰地</span>
+    <div class="ings"><div class="ing"><span class="n">干邑白兰地 Cognac</span><span class="b" style="width:120px"></span><span class="p">2.0 份</span></div>
+<div class="ing"><span class="n">君度橙酒 Triple Sec</span><span class="b" style="width:60px"></span><span class="p">1.0 份</span></div>
+<div class="ing"><span class="n">鲜柠檬汁 Lemon Juice</span><span class="b" style="width:60px"></span><span class="p">1.0 份</span></div></div>
+    <div class="meta">
+      <span>杯型 <b>Coupe 鸡尾酒杯</b></span>
+      <span>装饰 <b>糖口杯 + 柠檬皮</b></span>
+      <span>调制 <b>摇和 Shake</b></span>
+    </div>
+    <div class="notes">干邑与橙酒的优雅邂逅，平衡甜酸。</div>
+  </div>
+</div>
+
+<div class="card" id="card-b52" style="--accent:#c98a3a">
+  <div class="photo"><img id="img-b52" src="assets/b52.jpg" alt="B-52"></div>
+  <div class="stripe" style="background:#c98a3a"></div>
+  <div class="body">
+    <div class="title-row">
+      <div class="names"><div class="en">B-52</div><div class="zh">B52 轰炸机</div></div>
+      <div class="abv"><b>25.7</b><span>% ABV 度数</span></div>
+    </div>
+    <span class="cat">Shot 子弹杯</span>
+    <div class="ings"><div class="ing"><span class="n">咖啡利口酒 Coffee Liqueur</span><span class="b" style="width:120px"></span><span class="p">1.0 份</span></div>
+<div class="ing"><span class="n">百利甜酒 Baileys</span><span class="b" style="width:120px"></span><span class="p">1.0 份</span></div>
+<div class="ing"><span class="n">金万利 Grand Marnier</span><span class="b" style="width:120px"></span><span class="p">1.0 份</span></div></div>
+    <div class="meta">
+      <span>杯型 <b>Shot 子弹杯</b></span>
+      <span>装饰 <b>可点燃上桌</b></span>
+      <span>调制 <b>分层 Layer</b></span>
+    </div>
+    <div class="notes">三层利口酒分层射击杯，常点燃火焰上桌。</div>
+  </div>
+</div>
+
+<div class="card" id="card-godfather" style="--accent:#a9743a">
+  <div class="photo"><img id="img-godfather" src="assets/godfather.jpg" alt="Godfather"></div>
+  <div class="stripe" style="background:#a9743a"></div>
+  <div class="body">
+    <div class="title-row">
+      <div class="names"><div class="en">Godfather</div><div class="zh">教父</div></div>
+      <div class="abv"><b>25.7</b><span>% ABV 度数</span></div>
+    </div>
+    <span class="cat">Whisky 威士忌</span>
+    <div class="ings"><div class="ing"><span class="n">苏格兰威士忌 Scotch</span><span class="b" style="width:120px"></span><span class="p">2.0 份</span></div>
+<div class="ing"><span class="n">杏仁利口酒 Amaretto</span><span class="b" style="width:60px"></span><span class="p">1.0 份</span></div></div>
+    <div class="meta">
+      <span>杯型 <b>Old Fashioned 古典杯</b></span>
+      <span>装饰 <b>柠檬皮（可选）</b></span>
+      <span>调制 <b>搅拌 Stir</b></span>
+    </div>
+    <div class="notes">苏格兰威士忌与杏仁利口酒的硬核组合，与电影《教父》同名。</div>
+  </div>
+</div>
+
+<div class="card" id="card-orgasm" style="--accent:#c98a5a">
+  <div class="photo"><img id="img-orgasm" src="assets/orgasm.jpg" alt="Orgasm"></div>
+  <div class="stripe" style="background:#c98a5a"></div>
+  <div class="body">
+    <div class="title-row">
+      <div class="names"><div class="en">Orgasm</div><div class="zh">高潮</div></div>
+      <div class="abv"><b>29.3</b><span>% ABV 度数</span></div>
+    </div>
+    <span class="cat">Liqueur 利口酒</span>
+    <div class="ings"><div class="ing"><span class="n">伏特加 Vodka</span><span class="b" style="width:120px"></span><span class="p">1.0 份</span></div>
+<div class="ing"><span class="n">杏仁利口酒 Amaretto</span><span class="b" style="width:120px"></span><span class="p">1.0 份</span></div>
+<div class="ing"><span class="n">咖啡利口酒 Coffee Liqueur</span><span class="b" style="width:120px"></span><span class="p">1.0 份</span></div></div>
+    <div class="meta">
+      <span>杯型 <b>Coupe 鸡尾酒杯</b></span>
+      <span>装饰 <b>无</b></span>
+      <span>调制 <b>摇和/分层 Shake</b></span>
+    </div>
+    <div class="notes">伏特加+杏仁+咖啡利口酒，顺滑甜润的小杯饮。</div>
+  </div>
+</div>
+
+<div class="card" id="card-black-russian" style="--accent:#3a241a">
+  <div class="photo"><img id="img-black-russian" src="assets/black-russian.jpg" alt="Black Russian"></div>
+  <div class="stripe" style="background:#3a241a"></div>
+  <div class="body">
+    <div class="title-row">
+      <div class="names"><div class="en">Black Russian</div><div class="zh">黑俄罗斯</div></div>
+      <div class="abv"><b>30.3</b><span>% ABV 度数</span></div>
+    </div>
+    <span class="cat">Vodka 伏特加</span>
+    <div class="ings"><div class="ing"><span class="n">伏特加 Vodka</span><span class="b" style="width:120px"></span><span class="p">2.0 份</span></div>
+<div class="ing"><span class="n">咖啡利口酒 Coffee Liqueur</span><span class="b" style="width:60px"></span><span class="p">1.0 份</span></div></div>
+    <div class="meta">
+      <span>杯型 <b>Old Fashioned 古典杯</b></span>
+      <span>装饰 <b>无</b></span>
+      <span>调制 <b>直接 Build</b></span>
+    </div>
+    <div class="notes">白俄罗斯去掉奶油版，伏特加与咖啡利口酒的浓醇。</div>
+  </div>
+</div>
+
+<div class="card" id="card-dry-martini" style="--accent:#cfd6cf">
+  <div class="photo"><img id="img-dry-martini" src="assets/dry-martini.jpg" alt="Dry Martini"></div>
+  <div class="stripe" style="background:#cfd6cf"></div>
+  <div class="body">
+    <div class="title-row">
+      <div class="names"><div class="en">Dry Martini</div><div class="zh">干马天尼</div></div>
+      <div class="abv"><b>31.9</b><span>% ABV 度数</span></div>
+    </div>
+    <span class="cat">Gin 金酒</span>
+    <div class="ings"><div class="ing"><span class="n">金酒 Gin</span><span class="b" style="width:120px"></span><span class="p">6.0 份</span></div>
+<div class="ing"><span class="n">干味美思 Dry Vermouth</span><span class="b" style="width:20px"></span><span class="p">1.0 份</span></div></div>
+    <div class="meta">
+      <span>杯型 <b>Martini 马天尼杯</b></span>
+      <span>装饰 <b>橄榄 / 柠檬皮</b></span>
+      <span>调制 <b>搅拌 Stir</b></span>
+    </div>
+    <div class="notes">鸡尾酒之王，越干越硬核，比例自由度高。</div>
+  </div>
+</div>
+
+  <div class="card secret" id="secretCard">
+    <div class="secret-head">
+      <div class="secret-name">周六的秘密<span>Saturday's Secret</span></div>
+    </div>
+    <div class="stripe" style="background:#e8b84b"></div>
+    <div class="secret-body" id="secretBody">
+      <p class="secret-hint">点击骰子，揭开「周六的秘密」 🎲</p>
+    </div>
+    <button class="dice-btn" id="diceBtn" type="button">🎲</button>
+  </div>
+
+  </div>
+  <div class="secret-panel" id="secretPanel"></div>
+  <footer class="page">由 classic-cocktail-menu skill 生成 · 成品度数约为估算值，实际以配方与加冰量而定</footer>
+  
+<script>
+const SECRET_POOL = [{"name": "金酒 Gin", "abv": 40.0, "group": "基酒", "total_parts": 10.5, "used_by": 5}, {"name": "白朗姆 White Rum", "abv": 40.0, "group": "基酒", "total_parts": 8.0, "used_by": 4}, {"name": "鲜橙汁 Orange Juice", "abv": 0.0, "group": "果汁", "total_parts": 7.0, "used_by": 2}, {"name": "苏打水 Soda", "abv": 0.0, "group": "调饮/辅料", "total_parts": 7.0, "used_by": 2}, {"name": "伏特加 Vodka", "abv": 40.0, "group": "基酒", "total_parts": 7.0, "used_by": 5}, {"name": "菠萝汁 Pineapple Juice", "abv": 0.0, "group": "果汁", "total_parts": 5.5, "used_by": 2}, {"name": "龙舌兰 Tequila", "abv": 40.0, "group": "基酒", "total_parts": 5.5, "used_by": 3}, {"name": "可乐 Cola", "abv": 0.0, "group": "调饮/辅料", "total_parts": 5.0, "used_by": 2}, {"name": "咖啡利口酒 Coffee Liqueur", "abv": 20.0, "group": "利口酒/加香酒", "total_parts": 5.0, "used_by": 5}, {"name": "鲜柠檬汁 Lemon Juice", "abv": 0.0, "group": "果汁", "total_parts": 3.0, "used_by": 3}, {"name": "鲜青柠汁 Lime Juice", "abv": 0.0, "group": "果汁", "total_parts": 3.0, "used_by": 3}, {"name": "糖浆 Sugar Syrup", "abv": 0.0, "group": "调饮/辅料", "total_parts": 2.8, "used_by": 3}, {"name": "汤力水 Tonic Water", "abv": 0.0, "group": "调饮/辅料", "total_parts": 2.5, "used_by": 1}, {"name": "君度橙酒 Triple Sec", "abv": 40.0, "group": "利口酒/加香酒", "total_parts": 2.5, "used_by": 3}, {"name": "黑/白朗姆 Rum", "abv": 40.0, "group": "基酒", "total_parts": 2.0, "used_by": 1}, {"name": "波本威士忌 Bourbon", "abv": 40.0, "group": "基酒", "total_parts": 2.0, "used_by": 1}, {"name": "干邑白兰地 Cognac", "abv": 40.0, "group": "基酒", "total_parts": 2.0, "used_by": 1}, {"name": "苏格兰威士忌 Scotch", "abv": 40.0, "group": "基酒", "total_parts": 2.0, "used_by": 1}, {"name": "杏仁利口酒 Amaretto", "abv": 28.0, "group": "利口酒/加香酒", "total_parts": 2.0, "used_by": 2}, {"name": "椰奶 Coconut Cream", "abv": 0.0, "group": "调饮/辅料", "total_parts": 1.5, "used_by": 1}, {"name": "柠檬汁+糖浆 Sour Mix", "abv": 0.0, "group": "果汁", "total_parts": 1.5, "used_by": 1}, {"name": "鲜奶油 Fresh Cream", "abv": 0.0, "group": "调饮/辅料", "total_parts": 1.5, "used_by": 1}, {"name": "椰浆 Cream of Coconut", "abv": 0.0, "group": "调饮/辅料", "total_parts": 1.0, "used_by": 1}, {"name": "蛋清 Egg White", "abv": 0.0, "group": "调饮/辅料", "total_parts": 1.0, "used_by": 1}, {"name": "金巴利 Campari", "abv": 25.0, "group": "利口酒/加香酒", "total_parts": 1.0, "used_by": 1}, {"name": "红味美思 Sweet Vermouth", "abv": 16.0, "group": "利口酒/加香酒", "total_parts": 1.0, "used_by": 1}, {"name": "浓缩咖啡 Espresso", "abv": 0.0, "group": "利口酒/加香酒", "total_parts": 1.0, "used_by": 1}, {"name": "百利甜酒 Baileys", "abv": 17.0, "group": "利口酒/加香酒", "total_parts": 1.0, "used_by": 1}, {"name": "金万利 Grand Marnier", "abv": 40.0, "group": "利口酒/加香酒", "total_parts": 1.0, "used_by": 1}, {"name": "干味美思 Dry Vermouth", "abv": 15.0, "group": "利口酒/加香酒", "total_parts": 1.0, "used_by": 1}, {"name": "石榴糖浆 Grenadine", "abv": 0.0, "group": "调饮/辅料", "total_parts": 0.8, "used_by": 1}];
+(function(){
+  const dice = document.getElementById('diceBtn');
+  const body = document.getElementById('secretBody');
+  const panel = document.getElementById('secretPanel');
+  let n = 0, picks = [], phase = 0;
+
+  function rint(a,b){return a + Math.floor(Math.random()*(b-a+1));}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  function cardHTML(accent, photo, en, zh, abv, cat, ings, glass, garnish, method, notes){
+    return '<div class="card" style="--accent:'+accent+'">'
+      + '<div class="photo">'+photo+'</div>'
+      + '<div class="stripe" style="background:'+accent+'"></div>'
+      + '<div class="body">'
+      + '  <div class="title-row"><div class="names"><div class="en">'+en+'</div><div class="zh">'+zh+'</div></div>'
+      + '    <div class="abv"><b>'+abv+'</b><span>% ABV 度数</span></div></div>'
+      + '  <span class="cat">'+cat+'</span>'
+      + '  <div class="ings">'+ings+'</div>'
+      + '  <div class="meta"><span>杯型 <b>'+glass+'</b></span><span>装饰 <b>'+garnish+'</b></span><span>调制 <b>'+method+'</b></span></div>'
+      + '  <div class="notes">'+notes+'</div>'
+      + '</div></div>';
+  }
+
+  // 单个抽到的配方材料卡片（基酒 / 利口酒 / 果汁 / 调饮 等，全部材料）
+  function poolCardHTML(m){
+    const alcoholic = m.abv>0;
+    const accent = alcoholic ? '#caa64f' : '#7fae8e';
+    const photo = '<div class="ph" style="background:linear-gradient(135deg,'+accent+' 0%,#15110d 100%)"><span class="phz">'+esc(m.name)+'</span></div>';
+    const abvTxt = m.abv>0 ? m.abv+'%' : '无酒精';
+    const ings = '<div class="ing"><span class="n">'+esc(m.name)+'</span><span class="b" style="width:'+(m.abv*3)+'px"></span><span class="p">'+abvTxt+'</span></div>';
+    const notes = (m.group||'材料')+' · 单一风味材料，可直接入杯';
+    return cardHTML(accent, photo, esc(m.name), (m.group||'材料')+' Material', (m.abv||0).toFixed(1), m.group||'材料', ings, '—', '—', '—', notes);
+  }
+
+  // 全部生成后汇总成的一张卡片
+  function comboCardHTML(picks, abv){
+    const accent='#e8b84b';
+    let ings = picks.slice().reverse().map(function(p){
+      const m=p.data;
+      const abvTxt = m.abv>0 ? m.abv+'%' : '无酒精';
+      return '<div class="ing"><span class="n">'+esc(m.name)+' <i style="opacity:.55;font-style:normal">'+m.group+'</i></span><span class="b" style="width:'+(m.abv*3)+'px"></span><span class="p">'+abvTxt+'</span></div>';
+    }).join('');
+    const photo = '<div class="ph" style="background:linear-gradient(135deg,'+accent+' 0%,#15110d 100%)"><span class="phz">🍸 周六的秘密</span></div>';
+    const notes = '由 '+picks.length+' 种配方材料随机碰撞而成，按等量配比估算度数。';
+    return cardHTML(accent, photo, '周六的秘密', '神秘特调 Secret Punch', abv.toFixed(1), '随机组合 · '+picks.length+' 种', ings, '—', '—', '—', notes);
+  }
+
+  // 等量配比下的综合度数
+  function combinedAbv(picks){
+    if(!picks.length) return 0;
+    let al=0; picks.forEach(function(p){ al += (p.data.abv||0)/100; });
+    return al / picks.length * 100;
+  }
+
+  function pickRandom(){
+    if(!SECRET_POOL.length) return {data:{name:'空',abv:0,group:'基酒'}};
+    return {data: SECRET_POOL[rint(0,SECRET_POOL.length-1)]};
+  }
+
+  function ensureGrid(){
+    let grid = document.getElementById('secretCards');
+    if(!grid){
+      grid = document.createElement('div');
+      grid.id='secretCards'; grid.className='grid secret-cards';
+      panel.appendChild(grid);
+    }
+    return grid;
+  }
+
+  function reset(){
+    n=0; picks=[]; phase=0;
+    while(panel.firstChild) panel.removeChild(panel.firstChild);
+    const card = document.getElementById('secretCard');
+    if(card) card.classList.remove('done');
+    body.innerHTML='<p class="secret-hint">点击骰子，揭开「周六的秘密」 🎲</p>';
+    dice.textContent='🎲';
+    dice.className='dice-btn';
+  }
+
+  function onDice(){
+    if(phase===0){
+      n = rint(2,6); phase = 1; picks=[];
+      while(panel.firstChild) panel.removeChild(panel.firstChild);
+      body.innerHTML='<p class="secret-msg">本款「周六的秘密」由 <b>'+n+'</b> 种配方材料构成，继续点击骰子逐一抽取…</p>';
+      dice.innerHTML='🎲 <span class="dice-n">'+n+'</span>';
+    } else if(phase===1){
+      const item = pickRandom();
+      picks.push(item);
+      const grid = ensureGrid();
+      const tmp = document.createElement('div');
+      tmp.innerHTML = poolCardHTML(item.data);
+      // 倒序：最新抽取的插到最前
+      grid.insertBefore(tmp.firstChild, grid.firstChild);
+      const remain = n - picks.length;
+      body.innerHTML='<p class="secret-msg">已抽取 <b>'+picks.length+'</b> / '+n+' 种配方材料'+(remain>0?('，再点骰子 '+remain+' 次'):'')+'</p>';
+      if(picks.length>=n){ phase=2; finalize(); }
+    } else if(phase===2){
+      reset();
+    }
+  }
+
+  function finalize(){
+    // 汇总成一张卡片：清掉分步卡片，仅保留汇总卡
+    while(panel.firstChild) panel.removeChild(panel.firstChild);
+    const tmp = document.createElement('div');
+    tmp.innerHTML = comboCardHTML(picks, combinedAbv(picks));
+    panel.appendChild(tmp.firstChild);
+    dice.textContent='再听一个秘密 ↻';
+    dice.className='dice-btn again';
+    const card = document.getElementById('secretCard');
+    if(card) card.classList.add('done');
+    body.innerHTML='<p class="secret-msg">本杯「周六的秘密」已调制完成，点击可清空重来。</p>';
+  }
+
+  dice.addEventListener('click', onDice);
+})();
+</script>
+
+</div>
+<button class="to-nav-fab" id="toNavFab" type="button"><span class="ic">↑</span> 回到导览</button>
+<script>
+(function(){
+  var fab=document.getElementById('toNavFab');
+  var nav=document.getElementById('menuNav');
+  if(fab&&nav){
+    function onScroll(){
+      var nb=nav.getBoundingClientRect().bottom;
+      fab.style.display = nb < 0 ? 'inline-flex' : 'none';
+    }
+    window.addEventListener('scroll',onScroll,{passive:true});
+    window.addEventListener('resize',onScroll);
+    onScroll();
+    fab.addEventListener('click',function(e){
+      if(e) e.preventDefault();
+      window.scrollTo({top: 0, behavior:'smooth'});
+    });
+  }
+})();
+</script>
+<script>
+(function(){
+  var musicBtn=document.getElementById('musicBtn');
+  var audio=document.getElementById('musicAudio');
+  if(!musicBtn||!audio) return;
+  var b64El=document.getElementById('musicB64');
+  if(b64El && b64El.textContent && !audio.src){
+    try{
+      var bin=atob(b64El.textContent.replace(/\s+/g,''));
+      var arr=new Uint8Array(bin.length);
+      for(var i=0;i<bin.length;i++) arr[i]=bin.charCodeAt(i);
+      audio.src=URL.createObjectURL(new Blob([arr],{type:'audio/mpeg'}));
+    }catch(e){}
+  }
+  // 歌词滚动与音乐播放严格同步：
+  // - 若每行带 data-t（真实 LRC 时间戳），则按 currentTime 选「最后一句 t<=当前时间」，
+  //   唱到哪句就高亮并滚到哪句，不再按曲长匀速均分；
+  // - 否则退化按曲长均分（近似同步）。
+  // 暂停时 timeupdate 停止即冻结滚动；拖动进度条(seeked)也会即时重定位。
+  var lyric=document.getElementById('musicLyric');
+  var track=lyric?lyric.querySelector('.lyric-track'):null;
+  var lineEls=track?track.querySelectorAll('.lyric-text'):[];
+  var numLines=lineEls.length;
+  var hasTs = numLines>0 && lineEls[0].getAttribute('data-t');
+  function applyLyric(){
+    if(!numLines||!track) return;
+    var idx;
+    if(hasTs){
+      var t=audio.currentTime;
+      idx=-1;
+      for(var i=0;i<numLines;i++){
+        var lt=parseFloat(lineEls[i].getAttribute('data-t'))||0;
+        if(lt<=t) idx=i; else break;
+      }
+      if(idx<0) idx=0; // 前奏未到首句时，先展示首句
+    } else {
+      if(!audio.duration) return;
+      var p=audio.currentTime/audio.duration; if(p<0)p=0; if(p>1)p=1;
+      idx=Math.min(numLines-1, Math.floor(p*numLines));
+    }
+    for(var j=0;j<numLines;j++){ lineEls[j].classList.toggle('active', j===idx); }
+    var lh=lineEls[idx].offsetTop;
+    var lineH=lineEls[idx].offsetHeight;
+    var target=lh - lyric.clientHeight/2 + lineH/2;
+    track.style.transform='translateY('+(-target)+'px)';
+  }
+  function resetLyric(){
+    if(track) track.style.transform='translateY(0)';
+    for(var i=0;i<numLines;i++){ lineEls[i].classList.remove('active'); }
+  }
+  function setPlaying(on){
+    musicBtn.classList.toggle('playing',on);
+  }
+  musicBtn.addEventListener('click',function(){
+    if(audio.paused){
+      var p=audio.play();
+      if(p&&p.then){ p.then(function(){setPlaying(true);}).catch(function(){setPlaying(false);}); }
+      else{ setPlaying(true); }
+    }else{
+      audio.pause(); setPlaying(false);
+    }
+  });
+  audio.addEventListener('ended',function(){ setPlaying(false); resetLyric(); });
+  audio.addEventListener('pause',function(){ if(!audio.ended) setPlaying(false); });
+  audio.addEventListener('play',function(){ setPlaying(true); });
+  audio.addEventListener('timeupdate',applyLyric);
+  audio.addEventListener('seeked',applyLyric);
+})();
+</script>
+</body>
+</html>
