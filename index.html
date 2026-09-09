@@ -873,39 +873,41 @@ const SECRET_POOL = [{"name": "金酒 Gin", "abv": 40.0, "group": "基酒", "tot
   }
   // 移动端/微信内置浏览器对 <audio> 有自动播放限制：必须在用户首次手势时
   // 预热音频管线（load + 播放后立即暂停），否则 play() 会被静默拦截导致「点了没声音」。
-  var unlocked=false;
-  function unlockAudio(e){
+  // 关键：不能因为「首次手势来自按钮」就跳过预热——否则直接点按钮时音频从未解锁，
+  //       play() 被静默拒绝 -> 完全没声音。所以这里对所有首次手势都做预热。
+  var unlocked=false, realPlaying=false;
+  function unlockAudio(){
     if(unlocked) return;
-    if(e && e.target && musicBtn.contains(e.target)) return; // 来自按钮则交给按钮处理
     unlocked=true;
-    if(!audio.paused) return; // 已在播放则无需预热
     try{ audio.load(); }catch(_){}
     var pr=audio.play();
-    // 注意：仅做播放->暂停预热，绝不重置 currentTime，避免与按钮播放「抢拍」导致刚播几秒就被掐断
-    if(pr&&pr.then){ pr.then(function(){ try{audio.pause();}catch(_){} }).catch(function(){}); }
+    // 预热：开始播放后立刻暂停；仅当仍处于「预热」状态(用户尚未正式播放)才暂停，
+    // 避免与按钮的正式 play() 抢拍把刚开始的播放掐断。
+    if(pr&&pr.then){ pr.then(function(){ if(!realPlaying){ try{audio.pause();}catch(_){} } }).catch(function(){}); }
   }
   document.addEventListener('touchstart', unlockAudio, {passive:true});
   document.addEventListener('click', unlockAudio);
   function startPlay(){
-    if(audio.readyState===0){ try{ audio.load(); }catch(_){} } // preload=metadata 时确保已加载
+    if(!unlocked) unlockAudio();   // 兜底：若首个手势就是按钮，确保在此手势内解锁
+    realPlaying=true;
     var pr=audio.play();
     if(pr&&pr.then){
       pr.then(function(){ setPlaying(true); }).catch(function(){
-        // 首次 play 被拒：再 load 一次后重试
+        // 首次 play 被拒：再 load 一次后重试（仍可能在手势内）
         try{ audio.load(); }catch(_){}
         var pr2=audio.play();
-        if(pr2&&pr2.then){ pr2.then(function(){setPlaying(true);}).catch(function(){ setPlaying(false); }); }
+        if(pr2&&pr2.then){ pr2.then(function(){setPlaying(true);}).catch(function(){ realPlaying=false; setPlaying(false); }); }
         else{ setPlaying(true); }
       });
     } else { setPlaying(true); }
   }
   musicBtn.addEventListener('click',function(e){
-    e.stopPropagation();
+    if(e) e.stopPropagation();
     if(audio.paused){ startPlay(); }
-    else{ audio.pause(); setPlaying(false); }
+    else{ audio.pause(); realPlaying=false; setPlaying(false); }
   });
-  audio.addEventListener('ended',function(){ setPlaying(false); resetLyric(); });
-  audio.addEventListener('pause',function(){ if(!audio.ended) setPlaying(false); });
+  audio.addEventListener('ended',function(){ setPlaying(false); realPlaying=false; resetLyric(); });
+  audio.addEventListener('pause',function(){ if(!audio.ended){ setPlaying(false); realPlaying=false; } });
   audio.addEventListener('play',function(){ setPlaying(true); });
   audio.addEventListener('timeupdate',applyLyric);
   audio.addEventListener('seeked',applyLyric);
