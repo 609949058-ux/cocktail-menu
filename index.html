@@ -871,14 +871,37 @@ const SECRET_POOL = [{"name": "金酒 Gin", "abv": 40.0, "group": "基酒", "tot
   function setPlaying(on){
     musicBtn.classList.toggle('playing',on);
   }
-  musicBtn.addEventListener('click',function(){
-    if(audio.paused){
-      var p=audio.play();
-      if(p&&p.then){ p.then(function(){setPlaying(true);}).catch(function(){setPlaying(false);}); }
-      else{ setPlaying(true); }
-    }else{
-      audio.pause(); setPlaying(false);
-    }
+  // 移动端/微信内置浏览器对 <audio> 有自动播放限制：必须在用户首次手势时
+  // 预热音频管线（load + 播放后立即暂停），否则 play() 会被静默拦截导致「点了没声音」。
+  var unlocked=false;
+  function unlockAudio(e){
+    if(unlocked) return;
+    if(e && e.target && musicBtn.contains(e.target)) return; // 来自按钮则交给按钮处理
+    unlocked=true;
+    if(!audio.paused) return; // 已在播放则无需预热
+    try{ audio.load(); }catch(_){}
+    var pr=audio.play();
+    if(pr&&pr.then){ pr.then(function(){ try{audio.pause(); audio.currentTime=0;}catch(_){} }).catch(function(){}); }
+  }
+  document.addEventListener('touchstart', unlockAudio, {passive:true});
+  document.addEventListener('click', unlockAudio);
+  function startPlay(){
+    if(audio.readyState===0){ try{ audio.load(); }catch(_){} } // preload=none 时确保已加载
+    var pr=audio.play();
+    if(pr&&pr.then){
+      pr.then(function(){ setPlaying(true); }).catch(function(){
+        // 首次 play 被拒：再 load 一次后重试
+        try{ audio.load(); }catch(_){}
+        var pr2=audio.play();
+        if(pr2&&pr2.then){ pr2.then(function(){setPlaying(true);}).catch(function(){ setPlaying(false); }); }
+        else{ setPlaying(true); }
+      });
+    } else { setPlaying(true); }
+  }
+  musicBtn.addEventListener('click',function(e){
+    e.stopPropagation();
+    if(audio.paused){ startPlay(); }
+    else{ audio.pause(); setPlaying(false); }
   });
   audio.addEventListener('ended',function(){ setPlaying(false); resetLyric(); });
   audio.addEventListener('pause',function(){ if(!audio.ended) setPlaying(false); });
