@@ -871,29 +871,37 @@ const SECRET_POOL = [{"name": "金酒 Gin", "abv": 40.0, "group": "基酒", "tot
   function setPlaying(on){
     musicBtn.classList.toggle('playing',on);
   }
-  // 移动端/微信内置浏览器对 <audio> 有自动播放限制：必须在用户首次手势时
-  // 预热音频管线（load + 播放后立即暂停），否则 play() 会被静默拦截导致「点了没声音」。
-  // 关键：不能因为「首次手势来自按钮」就跳过预热——否则直接点按钮时音频从未解锁，
-  //       play() 被静默拒绝 -> 完全没声音。所以这里对所有首次手势都做预热。
-  var unlocked=false, realPlaying=false;
-  function unlockAudio(){
-    if(unlocked) return;
-    unlocked=true;
-    try{ audio.load(); }catch(_){}
+  // 微信内置浏览器(X5)对 <audio> 有严格限制：JS 触发的 play() 即便在用户手势内，
+  // 若未通过微信 JS 桥(WeixinJSBridge)解锁音频引擎，往往只会播放约 2 秒就被掐断。
+  // 标准修复：在 WeixinJSBridgeReady 的「被允许上下文」里预热（play 后立即暂停）
+  // 让微信真正解锁管线；普通浏览器无此桥，退化为首次手势预热。
+  // 预热只做「play→pause」解锁、绝不 load()（load 会重置微信缓冲区再次导致掐断），
+  // 且暂停用 !realPlaying 守护，避免掐断用户正式的播放。
+  var realPlaying=false;
+  function warm(){
+    if(realPlaying) return;            // 正在正式播放则不打断
     var pr=audio.play();
-    // 预热：开始播放后立刻暂停；仅当仍处于「预热」状态(用户尚未正式播放)才暂停，
-    // 避免与按钮的正式 play() 抢拍把刚开始的播放掐断。
-    if(pr&&pr.then){ pr.then(function(){ if(!realPlaying){ try{audio.pause();}catch(_){} } }).catch(function(){}); }
+    if(pr&&pr.then){
+      pr.then(function(){ if(!realPlaying){ try{audio.pause();}catch(_){} } }).catch(function(){});
+    } else {
+      try{ audio.pause(); }catch(_){}
+    }
   }
-  document.addEventListener('touchstart', unlockAudio, {passive:true});
-  document.addEventListener('click', unlockAudio);
+  // 微信：在「被允许的桥上下文」里预热，最可靠
+  if(typeof WeixinJSBridge!=='undefined'){
+    warm();
+  } else {
+    document.addEventListener('WeixinJSBridgeReady', warm, false);
+  }
+  // 普通浏览器 / 兜底：首次手势预热
+  document.addEventListener('touchstart', warm, {passive:true});
+  document.addEventListener('click', warm);
   function startPlay(){
-    if(!unlocked) unlockAudio();   // 兜底：若首个手势就是按钮，确保在此手势内解锁
     realPlaying=true;
     var pr=audio.play();
     if(pr&&pr.then){
       pr.then(function(){ setPlaying(true); }).catch(function(){
-        // 首次 play 被拒：再 load 一次后重试（仍可能在手势内）
+        // 极少数情况下 play 被拒：重载一次后重试
         try{ audio.load(); }catch(_){}
         var pr2=audio.play();
         if(pr2&&pr2.then){ pr2.then(function(){setPlaying(true);}).catch(function(){ realPlaying=false; setPlaying(false); }); }
