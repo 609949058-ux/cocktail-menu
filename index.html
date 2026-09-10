@@ -871,54 +871,67 @@ const SECRET_POOL = [{"name": "金酒 Gin", "abv": 40.0, "group": "基酒", "tot
   function setPlaying(on){
     musicBtn.classList.toggle('playing',on);
   }
-  // 微信内置浏览器(X5)对 <audio> 有严格限制：JS 触发的 play() 即便在用户手势内，
-  // 若未通过微信 JS 桥(WeixinJSBridge)解锁音频引擎，往往只会播放约 2 秒就被掐断。
-  // 标准修复：在 WeixinJSBridgeReady 的「被允许上下文」里预热（play 后立即暂停）
-  // 让微信真正解锁管线；普通浏览器无此桥，退化为首次手势预热。
-  // 预热只做「play→pause」解锁、绝不 load()（load 会重置微信缓冲区再次导致掐断），
-  // 且暂停用 !realPlaying 守护，避免掐断用户正式的播放。
-  var realPlaying=false;
-  function warm(){
-    if(realPlaying) return;            // 正在正式播放则不打断
-    var pr=audio.play();
-    if(pr&&pr.then){
-      pr.then(function(){ if(!realPlaying){ try{audio.pause();}catch(_){} } }).catch(function(){});
-    } else {
-      try{ audio.pause(); }catch(_){}
-    }
+  // —— iOS / 微信 稳健播放方案（关键修复）——
+  // WebKit 硬规则：audio.play() 必须发生在「用户手势调用栈内」。一旦在手势外
+  // （微信桥回调、全局 touchstart/click 监听、setTimeout 等）调用过 play()，
+  // iOS 会把该 <audio> 元素标记为 autoplay-blocked，之后即便在按钮手势内 play() 也
+  // 持续失败 —— 这正是旧版在 iOS 上完全无声（微信/浏览器都不行）的元凶：预热里
+  // 的 play→pause 在手势外污染了元素。
+  // 修复原则：① 任何预热只 load() 绝不 play()；② 真正的 play() 仅在按钮 click 调用栈内；
+  //           ③ 若 play() 仍被拒（元素已被污染），则重建 <audio> 后重试（最可靠兜底）。
+  function wxAuth(){
+    // 微信内：仅让解码器就绪，绝不在此 play()，否则 iOS 会被污染
+    try{ audio.load(); }catch(_){}
   }
-  // 微信：在「被允许的桥上下文」里预热，最可靠
   if(typeof WeixinJSBridge!=='undefined'){
-    warm();
+    try{ WeixinJSBridge.invoke('getNetworkType',{}, function(){}); }catch(_){}
+    wxAuth();
   } else {
-    document.addEventListener('WeixinJSBridgeReady', warm, false);
+    document.addEventListener('WeixinJSBridgeReady', function(){
+      try{ WeixinJSBridge.invoke('getNetworkType',{}, function(){}); }catch(_){}
+      wxAuth();
+    }, false);
   }
-  // 普通浏览器 / 兜底：首次手势预热
-  document.addEventListener('touchstart', warm, {passive:true});
-  document.addEventListener('click', warm);
-  function startPlay(){
-    realPlaying=true;
+  // 首次任意手势：仅 load() 让 iOS 解码器就绪（不 play，避免污染）
+  function warmLoad(){
+    try{ audio.load(); }catch(_){}
+    document.removeEventListener('touchstart', warmLoad);
+    document.removeEventListener('click', warmLoad);
+  }
+  document.addEventListener('touchstart', warmLoad, {passive:true});
+  document.addEventListener('click', warmLoad);
+  // 绑定歌词/状态事件到当前 audio 元素（重建后需重新调用）
+  function bindAudioEvents(a){
+    a.addEventListener('ended',function(){ setPlaying(false); resetLyric(); });
+    a.addEventListener('pause',function(){ if(!a.ended){ setPlaying(false); } });
+    a.addEventListener('play',function(){ setPlaying(true); });
+    a.addEventListener('timeupdate',applyLyric);
+    a.addEventListener('seeked',applyLyric);
+  }
+  bindAudioEvents(audio);
+  function doPlay(){
+    // 必须在用户手势调用栈内同步调用
     var pr=audio.play();
     if(pr&&pr.then){
       pr.then(function(){ setPlaying(true); }).catch(function(){
-        // 极少数情况下 play 被拒：重载一次后重试
-        try{ audio.load(); }catch(_){}
-        var pr2=audio.play();
-        if(pr2&&pr2.then){ pr2.then(function(){setPlaying(true);}).catch(function(){ realPlaying=false; setPlaying(false); }); }
-        else{ setPlaying(true); }
+        // iOS 该元素可能已被自动播放策略阻止：重建 <audio> 后重试（最可靠兜底）
+        try{
+          var fresh=new Audio(audio.src||audio.currentSrc);
+          fresh.loop=true; fresh.preload='metadata';
+          audio=fresh;            // 后续控制指向新元素
+          bindAudioEvents(fresh);
+          var pr2=fresh.play();
+          if(pr2&&pr2.then){ pr2.then(function(){ setPlaying(true); }).catch(function(){ setPlaying(false); }); }
+          else { setPlaying(true); }
+        }catch(_){ setPlaying(false); }
       });
     } else { setPlaying(true); }
   }
   musicBtn.addEventListener('click',function(e){
     if(e) e.stopPropagation();
-    if(audio.paused){ startPlay(); }
-    else{ audio.pause(); realPlaying=false; setPlaying(false); }
+    if(audio.paused){ doPlay(); }
+    else{ audio.pause(); setPlaying(false); }
   });
-  audio.addEventListener('ended',function(){ setPlaying(false); realPlaying=false; resetLyric(); });
-  audio.addEventListener('pause',function(){ if(!audio.ended){ setPlaying(false); realPlaying=false; } });
-  audio.addEventListener('play',function(){ setPlaying(true); });
-  audio.addEventListener('timeupdate',applyLyric);
-  audio.addEventListener('seeked',applyLyric);
 })();
 </script>
 </body>
