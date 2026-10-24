@@ -943,6 +943,101 @@
      "abv": 0
     }
    ]
+  },
+  {
+   "id": "playboy",
+   "name_en": "Playboy",
+   "name_zh": "花花公子",
+   "category": "Vodka 伏特加",
+   "accent": "#d8c9a8",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/playboy.jpg",
+   "glass": "Coupe 鸡尾酒杯",
+   "garnish": "可可粉（可选）",
+   "method": "摇和 Shake",
+   "notes": "伏特加 + 咖啡利口酒 + 鲜奶油，丝滑奶香的微醺小酌。",
+   "dilution": 1.0,
+   "ingredients": [
+    {
+     "name": "伏特加 Vodka",
+     "parts": 3,
+     "abv": 40
+    },
+    {
+     "name": "咖啡利口酒 Coffee Liqueur",
+     "parts": 1.5,
+     "abv": 20
+    },
+    {
+     "name": "鲜奶油 Cream",
+     "parts": 1.5,
+     "abv": 0
+    }
+   ]
+  },
+  {
+   "id": "see-you-tomorrow",
+   "name_en": "See You Tomorrow",
+   "name_zh": "明天见",
+   "category": "Rum 朗姆",
+   "accent": "#e0c463",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/see-you-tomorrow.jpg",
+   "glass": "Coupe 鸡尾酒杯",
+   "garnish": "菠萝角 Pineapple Wedge",
+   "method": "摇和 Shake",
+   "notes": "上田和男名作：白朗姆 + 杏仁利口酒 + 菠萝柠檬，热带果香轻盈易饮。",
+   "dilution": 1.2,
+   "ingredients": [
+    {
+     "name": "白朗姆酒 White Rum",
+     "parts": 4,
+     "abv": 40
+    },
+    {
+     "name": "杏仁利口酒 Amaretto",
+     "parts": 1.5,
+     "abv": 28
+    },
+    {
+     "name": "柠檬汁 Lemon Juice",
+     "parts": 1.5,
+     "abv": 0
+    },
+    {
+     "name": "菠萝汁 Pineapple Juice",
+     "parts": 3,
+     "abv": 0
+    }
+   ]
+  },
+  {
+   "id": "highball",
+   "name_en": "Highball",
+   "name_zh": "嗨棒",
+   "category": "Whiskey 威士忌",
+   "accent": "#caa24a",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/highball.jpg",
+   "glass": "Highball 海波杯",
+   "garnish": "柠檬片 Lemon Slice",
+   "method": "直接 Build",
+   "notes": "威士忌 + 苏打水的极简日式喝法，清爽气泡、麦香干净，最易入口。",
+   "dilution": 0.5,
+   "ingredients": [
+    {
+     "name": "威士忌 Whiskey",
+     "parts": 3,
+     "abv": 43
+    },
+    {
+     "name": "苏打水 Soda Water",
+     "parts": 6,
+     "abv": 0
+    },
+    {
+     "name": "柠檬汁 Lemon Juice",
+     "parts": 0.5,
+     "abv": 0
+    }
+   ]
   }
  ]
 }
