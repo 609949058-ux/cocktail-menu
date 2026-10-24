@@ -903,6 +903,46 @@
      "abv": 0
     }
    ]
+  },
+  {
+   "id": "penicillin",
+   "name_en": "Penicillin",
+   "name_zh": "盘尼西林",
+   "category": "Whiskey 威士忌",
+   "accent": "#c08038",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/penicillin.jpg",
+   "glass": "Old Fashioned 古典杯",
+   "garnish": "糖渍姜 Candied Ginger",
+   "method": "摇和 Shake",
+   "notes": "苏格兰威士忌 + 蜂蜜 + 姜 + 柠檬，顶部漂浮一抹泥煤威士忌，暖润带烟熏，是现代经典。",
+   "dilution": 1.0,
+   "ingredients": [
+    {
+     "name": "苏格兰威士忌 Scotch Whisky",
+     "parts": 6,
+     "abv": 43
+    },
+    {
+     "name": "泥煤威士忌 Islay Whisky（漂浮）",
+     "parts": 1,
+     "abv": 45
+    },
+    {
+     "name": "柠檬汁 Lemon Juice",
+     "parts": 2,
+     "abv": 0
+    },
+    {
+     "name": "蜂蜜糖浆 Honey Syrup",
+     "parts": 2,
+     "abv": 0
+    },
+    {
+     "name": "姜糖浆 Ginger Syrup",
+     "parts": 1.5,
+     "abv": 0
+    }
+   ]
   }
  ]
 }
