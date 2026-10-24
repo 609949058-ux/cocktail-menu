@@ -1269,8 +1269,25 @@ const SECRET_POOL = [{"name": "雪碧 Sprite（补满）", "abv": 0.0, "group": 
   Array.prototype.forEach.call(document.querySelectorAll('.spirit-link'), function(a){
     linkMap[a.getAttribute('data-target')] = a;
   });
+  // 手机端侧边栏是横向滚动条：当用户通过滚动页面内容浏览到后面的基酒时，
+  // 被高亮的项可能落在横向可视区之外，导航条本不会跟着平移，导致"看不到当前基酒"。
+  // ensureVisible 仅在存在横向溢出时，把高亮项平滑滚到容器中央，使其始终可见。
+  function ensureVisible(link){
+    if(!link) return;
+    var nav = link.closest ? link.closest('.spirit-nav') : link.parentNode;
+    if(!nav) return;
+    if(nav.scrollWidth <= nav.clientWidth + 2) return; // 无横向溢出则无需滚动
+    var lr = link.getBoundingClientRect();
+    var nr = nav.getBoundingClientRect();
+    if(lr.left < nr.left || lr.right > nr.right){
+      var delta = (lr.left + lr.width/2) - (nr.left + nr.width/2);
+      if(nav.scrollTo){ nav.scrollTo({ left: nav.scrollLeft + delta, behavior:'smooth' }); }
+      else { nav.scrollLeft += delta; }
+    }
+  }
   function setActive(id){
     for(var k in linkMap){ if(linkMap.hasOwnProperty(k)) linkMap[k].classList.toggle('active', k===id); }
+    ensureVisible(linkMap[id]);
   }
   // 视口中部一条窄带（45%~50%）作为「当前区」判定线，分节越过即高亮
   if('IntersectionObserver' in window){
