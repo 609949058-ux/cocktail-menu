@@ -224,6 +224,67 @@
     .music-lyric .lyric-track{transition:none;}
     .music-lyric .lyric-text{transition:none;}
   }
+  /* ===== 基酒分类侧边栏 + 分节 ===== */
+  .layout{ display:flex; gap:30px; align-items:flex-start; max-width:1180px; margin:0 auto; }
+  .sidebar{ position:sticky; top:24px; flex:0 0 170px; align-self:flex-start; }
+  .sidebar-inner{
+    background:linear-gradient(180deg,var(--card),rgba(31,24,18,.5));
+    border:1px solid var(--line); border-radius:16px; padding:16px 12px;
+    box-shadow:0 14px 34px rgba(0,0,0,.35);
+  }
+  .sidebar-title{
+    font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--gold); font-weight:700; text-align:center; margin-bottom:12px;
+  }
+  .spirit-nav{ display:flex; flex-direction:column; gap:4px; }
+  .spirit-link{
+    display:flex; align-items:center; justify-content:space-between; gap:8px;
+    text-decoration:none; color:var(--ink-dim); font-size:15px;
+    padding:10px 12px; border-radius:12px; transition:all .18s ease;
+    border-left:3px solid transparent;
+  }
+  .spirit-link:hover{ background:rgba(216,178,94,.12); color:var(--ink); }
+  .spirit-link.active{
+    background:linear-gradient(90deg,rgba(216,178,94,.28),rgba(216,178,94,.06));
+    color:#fff; border-left-color:var(--gold); font-weight:700;
+  }
+  .spirit-link .sl-count{
+    font-size:11px; color:var(--ink-dim); background:rgba(255,255,255,.06);
+    border-radius:999px; padding:1px 8px; min-width:22px; text-align:center;
+  }
+  .spirit-link.active .sl-count{ color:var(--gold); background:rgba(216,178,94,.2); }
+  .content{ flex:1 1 auto; min-width:0; }
+  .spirit-section{ scroll-margin-top:20px; margin-bottom:40px; }
+  .section-title{
+    display:flex; align-items:baseline; gap:12px; margin:4px 0 20px;
+    padding-bottom:10px; border-bottom:1px solid var(--line);
+  }
+  .section-title .st-en{
+    font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-dim);
+  }
+  .section-title .st-zh{
+    font-size:24px; font-weight:800; letter-spacing:.04em;
+    background:linear-gradient(90deg,#f3d99a,#d8b25e,#f3d99a);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .section-title .st-count{ font-size:12px; color:var(--ink-dim); margin-left:auto; }
+  @media (max-width:820px){
+    .layout{ flex-direction:column; gap:0; }
+    .sidebar{
+      position:sticky; top:0; z-index:40; flex:none; width:100%;
+      margin:0 -12px; padding:8px 12px;
+      background:linear-gradient(180deg,var(--bg1),rgba(21,17,13,.96));
+      border-bottom:1px solid var(--line);
+    }
+    .sidebar-inner{
+      background:transparent; border:none; box-shadow:none; padding:0; border-radius:0;
+    }
+    .sidebar-title{ display:none; }
+    .spirit-nav{ flex-direction:row; gap:8px; overflow-x:auto; padding-bottom:2px; -webkit-overflow-scrolling:touch; }
+    .spirit-link{ flex:0 0 auto; border-left:none; border-bottom:3px solid transparent; padding:8px 14px; border-radius:999px; }
+    .spirit-link.active{ border-left:none; border-bottom-color:var(--gold); }
+    .spirit-section{ scroll-margin-top:66px; }
+  }
 </style>
 </head>
 <body>
@@ -264,6 +325,24 @@
     <a class="nav-dog" href="#secretCard" title="周六 · 马尔济斯 🐾"><img class="pup" src="assets/dog_xiaobai.gif" alt="小狗动图"></a>
   </div>
 </nav>
+  <div class="layout">
+    <aside class="sidebar">
+  <div class="sidebar-inner">
+    <div class="sidebar-title">基酒分类</div>
+    <nav class="spirit-nav">
+      <a class="spirit-link" href="#sec-vodka" data-target="sec-vodka"><span class="sl-zh">伏特加</span><span class="sl-count">6</span></a>
+      <a class="spirit-link" href="#sec-rum" data-target="sec-rum"><span class="sl-zh">朗姆</span><span class="sl-count">5</span></a>
+      <a class="spirit-link" href="#sec-tequila" data-target="sec-tequila"><span class="sl-zh">龙舌兰</span><span class="sl-count">2</span></a>
+      <a class="spirit-link" href="#sec-brandy" data-target="sec-brandy"><span class="sl-zh">白兰地</span><span class="sl-count">1</span></a>
+      <a class="spirit-link" href="#sec-gin" data-target="sec-gin"><span class="sl-zh">金酒</span><span class="sl-count">6</span></a>
+      <a class="spirit-link" href="#sec-whiskey" data-target="sec-whiskey"><span class="sl-zh">威士忌</span><span class="sl-count">3</span></a>
+      <a class="spirit-link" href="#sec-other" data-target="sec-other"><span class="sl-zh">其他</span><span class="sl-count">2</span></a>
+    </nav>
+  </div>
+</aside>
+    <main class="content">
+<section class="spirit-section" id="sec-vodka">
+  <h2 class="section-title"><span class="st-en">Vodka</span><span class="st-zh">伏特加</span><span class="st-count">6 款</span></h2>
   <div class="grid">
 <div class="card" id="card-black-russian" style="--accent:#3a241a">
   <div class="photo"><img id="img-black-russian" src="assets/black-russian.jpg" alt="Black Russian"></div>
@@ -391,6 +470,11 @@
   </div>
 </div>
 
+  </div>
+</section>
+<section class="spirit-section" id="sec-rum">
+  <h2 class="section-title"><span class="st-en">Rum</span><span class="st-zh">朗姆</span><span class="st-count">5 款</span></h2>
+  <div class="grid">
 <div class="card" id="card-daiquiri" style="--accent:#f0e6a0">
   <div class="photo"><img id="img-daiquiri" src="assets/daiquiri.jpg" alt="Daiquiri"></div>
   <div class="stripe" style="background:#f0e6a0"></div>
@@ -498,6 +582,11 @@
   </div>
 </div>
 
+  </div>
+</section>
+<section class="spirit-section" id="sec-tequila">
+  <h2 class="section-title"><span class="st-en">Tequila</span><span class="st-zh">龙舌兰</span><span class="st-count">2 款</span></h2>
+  <div class="grid">
 <div class="card" id="card-margarita" style="--accent:#e0b84a">
   <div class="photo"><img id="img-margarita" src="assets/margarita.jpg" alt="Margarita"></div>
   <div class="stripe" style="background:#e0b84a"></div>
@@ -540,6 +629,11 @@
   </div>
 </div>
 
+  </div>
+</section>
+<section class="spirit-section" id="sec-brandy">
+  <h2 class="section-title"><span class="st-en">Brandy</span><span class="st-zh">白兰地</span><span class="st-count">1 款</span></h2>
+  <div class="grid">
 <div class="card" id="card-sidecar" style="--accent:#e0a83a">
   <div class="photo"><img id="img-sidecar" src="assets/sidecar.jpg" alt="Sidecar"></div>
   <div class="stripe" style="background:#e0a83a"></div>
@@ -561,6 +655,11 @@
   </div>
 </div>
 
+  </div>
+</section>
+<section class="spirit-section" id="sec-gin">
+  <h2 class="section-title"><span class="st-en">Gin</span><span class="st-zh">金酒</span><span class="st-count">6 款</span></h2>
+  <div class="grid">
 <div class="card" id="card-dry-martini" style="--accent:#cfd6cf">
   <div class="photo"><img id="img-dry-martini" src="assets/dry-martini.jpg" alt="Dry Martini"></div>
   <div class="stripe" style="background:#cfd6cf"></div>
@@ -692,6 +791,11 @@
   </div>
 </div>
 
+  </div>
+</section>
+<section class="spirit-section" id="sec-whiskey">
+  <h2 class="section-title"><span class="st-en">Whiskey</span><span class="st-zh">威士忌</span><span class="st-count">3 款</span></h2>
+  <div class="grid">
 <div class="card" id="card-old-fashioned" style="--accent:#c98a3a">
   <div class="photo"><img id="img-old-fashioned" src="assets/old-fashioned.jpg" alt="Old Fashioned"></div>
   <div class="stripe" style="background:#c98a3a"></div>
@@ -755,6 +859,11 @@
   </div>
 </div>
 
+  </div>
+</section>
+<section class="spirit-section" id="sec-other">
+  <h2 class="section-title"><span class="st-en">Other</span><span class="st-zh">其他</span><span class="st-count">2 款</span></h2>
+  <div class="grid">
 <div class="card" id="card-b52" style="--accent:#c98a3a">
   <div class="photo"><img id="img-b52" src="assets/b52.jpg" alt="B-52"></div>
   <div class="stripe" style="background:#c98a3a"></div>
@@ -801,6 +910,8 @@
   </div>
 </div>
 
+  </div>
+</section>
   <div class="card secret" id="secretCard">
     <div class="secret-head">
       <div class="secret-name">周六的秘密<span>Saturday's Secret</span></div>
@@ -812,8 +923,9 @@
     <button class="dice-btn" id="diceBtn" type="button">🎲</button>
   </div>
 
+      <div class="secret-panel" id="secretPanel"></div>
+    </main>
   </div>
-  <div class="secret-panel" id="secretPanel"></div>
   <footer class="page">由 classic-cocktail-menu skill 生成 · 成品度数约为估算值，实际以配方与加冰量而定</footer>
   
 <script>
@@ -1071,6 +1183,37 @@ const SECRET_POOL = [{"name": "金酒 Gin", "abv": 40.0, "group": "基酒", "tot
     if(audio.paused){ doPlay(); }
     else{ audio.pause(); setPlaying(false); }
   });
+})();
+</script>
+<script>
+// 基酒侧边栏滚动高亮：观察每个分节，进入视口中带时高亮对应基酒
+(function(){
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.spirit-section'));
+  if(!sections.length) return;
+  var linkMap = {};
+  Array.prototype.forEach.call(document.querySelectorAll('.spirit-link'), function(a){
+    linkMap[a.getAttribute('data-target')] = a;
+  });
+  function setActive(id){
+    for(var k in linkMap){ if(linkMap.hasOwnProperty(k)) linkMap[k].classList.toggle('active', k===id); }
+  }
+  // 视口中部一条窄带（45%~50%）作为「当前区」判定线，分节越过即高亮
+  if('IntersectionObserver' in window){
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ setActive(e.target.id); }
+      });
+    }, { rootMargin:'-45% 0px -50% 0px', threshold:0 });
+    sections.forEach(function(s){ observer.observe(s); });
+  }
+  // 兜底：滚到页面最底部时高亮最后一组（短分组可能永远到不了判定带）
+  window.addEventListener('scroll', function(){
+    if((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 6){
+      setActive(sections[sections.length-1].id);
+    }
+  }, {passive:true});
+  // 初始高亮第一组
+  setActive(sections[0].id);
 })();
 </script>
 </body>
