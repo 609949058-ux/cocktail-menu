@@ -280,7 +280,8 @@
       background:transparent; border:none; box-shadow:none; padding:0; border-radius:0;
     }
     .sidebar-title{ display:none; }
-    .spirit-nav{ flex-direction:row; gap:8px; overflow-x:auto; padding-bottom:2px; -webkit-overflow-scrolling:touch; }
+    .spirit-nav{ flex-direction:row; gap:8px; overflow-x:auto; padding-bottom:2px; -webkit-overflow-scrolling:touch; scrollbar-width:none; -ms-overflow-style:none; }
+    .spirit-nav::-webkit-scrollbar{ display:none; width:0; height:0; }
     .spirit-link{ flex:0 0 auto; border-left:none; border-bottom:3px solid transparent; padding:8px 14px; border-radius:999px; }
     .spirit-link.active{ border-left:none; border-bottom-color:var(--gold); }
     .spirit-section{ scroll-margin-top:66px; }
@@ -297,6 +298,12 @@
   <nav class="menu-nav" id="menuNav">
   <div class="nav-title">导览 · Index</div>
   <div class="nav-chips">
+    <a class="nav-chip" href="#card-dry-martini">干马天尼</a>
+    <a class="nav-chip" href="#card-aviation">飞行</a>
+    <a class="nav-chip" href="#card-negroni">尼格罗尼</a>
+    <a class="nav-chip" href="#card-tom-collins">汤姆柯林斯</a>
+    <a class="nav-chip" href="#card-gin-tonic">金汤力</a>
+    <a class="nav-chip" href="#card-ramos-gin-fizz">拉莫斯金菲士酒</a>
     <a class="nav-chip" href="#card-black-russian">黑俄罗斯</a>
     <a class="nav-chip" href="#card-orgasm">高潮</a>
     <a class="nav-chip" href="#card-white-russian">白俄罗斯</a>
@@ -311,12 +318,6 @@
     <a class="nav-chip" href="#card-margarita">玛格丽特</a>
     <a class="nav-chip" href="#card-tequila-sunrise">龙舌兰日出</a>
     <a class="nav-chip" href="#card-sidecar">边车</a>
-    <a class="nav-chip" href="#card-dry-martini">干马天尼</a>
-    <a class="nav-chip" href="#card-aviation">飞行</a>
-    <a class="nav-chip" href="#card-negroni">尼格罗尼</a>
-    <a class="nav-chip" href="#card-tom-collins">汤姆柯林斯</a>
-    <a class="nav-chip" href="#card-gin-tonic">金汤力</a>
-    <a class="nav-chip" href="#card-ramos-gin-fizz">拉莫斯金菲士酒</a>
     <a class="nav-chip" href="#card-old-fashioned">古典</a>
     <a class="nav-chip" href="#card-godfather">教父</a>
     <a class="nav-chip" href="#card-whiskey-sour">威士忌酸酒</a>
