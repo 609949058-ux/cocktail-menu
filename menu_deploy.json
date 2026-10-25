@@ -2084,19 +2084,19 @@
    "ingredients": [
     {
      "name": "白朗姆 White Rum",
-     "parts": 30,
+     "parts": 40,
      "abv": 40,
      "unit": "ml"
     },
     {
      "name": "君度橙酒 Triple Sec",
-     "parts": 30,
+     "parts": 20,
      "abv": 40,
      "unit": "ml"
     },
     {
      "name": "柠檬汁 Lemon Juice",
-     "parts": 15,
+     "parts": 20,
      "abv": 0,
      "unit": "ml"
     }
