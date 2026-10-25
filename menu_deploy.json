@@ -144,13 +144,15 @@
    "ingredients": [
     {
      "name": "伏特加 Vodka",
-     "parts": 2,
-     "abv": 40
+     "parts": 20.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "咖啡利口酒 Coffee Liqueur",
-     "parts": 1,
-     "abv": 20
+     "parts": 10.0,
+     "abv": 20,
+     "unit": "ml"
     }
    ]
   },
@@ -169,18 +171,21 @@
    "ingredients": [
     {
      "name": "伏特加 Vodka",
-     "parts": 2,
-     "abv": 40
+     "parts": 20.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "咖啡利口酒 Coffee Liqueur",
-     "parts": 1,
-     "abv": 20
+     "parts": 10.0,
+     "abv": 20,
+     "unit": "ml"
     },
     {
      "name": "鲜奶油 Fresh Cream",
-     "parts": 1.5,
-     "abv": 0
+     "parts": 15.0,
+     "abv": 0,
+     "unit": "ml"
     }
    ]
   },
@@ -199,18 +204,21 @@
    "ingredients": [
     {
      "name": "伏特加 Vodka",
-     "parts": 1.5,
-     "abv": 40
+     "parts": 15.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "咖啡利口酒 Coffee Liqueur",
-     "parts": 1,
-     "abv": 20
+     "parts": 10.0,
+     "abv": 20,
+     "unit": "ml"
     },
     {
      "name": "浓缩咖啡 Espresso",
-     "parts": 1,
-     "abv": 0
+     "parts": 10.0,
+     "abv": 0,
+     "unit": "ml"
     }
    ]
   },
@@ -229,23 +237,27 @@
    "ingredients": [
     {
      "name": "柠檬伏特加 Citron Vodka",
-     "parts": 1.5,
-     "abv": 40
+     "parts": 15.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "君度橙酒 Triple Sec",
-     "parts": 1,
-     "abv": 40
+     "parts": 10.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "鲜青柠汁 Lime Juice",
-     "parts": 0.5,
-     "abv": 0
+     "parts": 5.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "蔓越莓汁 Cranberry Juice",
-     "parts": 1.5,
-     "abv": 0
+     "parts": 15.0,
+     "abv": 0,
+     "unit": "ml"
     }
    ]
   },
@@ -264,18 +276,21 @@
    "ingredients": [
     {
      "name": "伏特加 Vodka",
-     "parts": 1.5,
-     "abv": 40
+     "parts": 15.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "鲜青柠汁 Lime Juice",
-     "parts": 0.5,
-     "abv": 0
+     "parts": 5.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "姜啤 Ginger Beer",
-     "parts": 3,
-     "abv": 0
+     "parts": 30.0,
+     "abv": 0,
+     "unit": "ml"
     }
    ]
   },
@@ -294,18 +309,21 @@
    "ingredients": [
     {
      "name": "白朗姆 White Rum",
-     "parts": 2,
-     "abv": 40
+     "parts": 20.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "鲜青柠汁 Lime Juice",
-     "parts": 1,
-     "abv": 0
+     "parts": 10.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "糖浆 Sugar Syrup",
-     "parts": 0.75,
-     "abv": 0
+     "parts": 7.5,
+     "abv": 0,
+     "unit": "ml"
     }
    ]
   },
@@ -324,23 +342,27 @@
    "ingredients": [
     {
      "name": "白朗姆 White Rum",
-     "parts": 4,
-     "abv": 40
+     "parts": 40.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "鲜青柠汁 Lime Juice",
-     "parts": 1.5,
-     "abv": 0
+     "parts": 15.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "糖浆 Sugar Syrup",
-     "parts": 1,
-     "abv": 0
+     "parts": 10.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "苏打水 Soda Water",
-     "parts": 4,
-     "abv": 0
+     "parts": 40.0,
+     "abv": 0,
+     "unit": "ml"
     }
    ]
   },
@@ -359,18 +381,21 @@
    "ingredients": [
     {
      "name": "白朗姆 White Rum",
-     "parts": 2,
-     "abv": 40
+     "parts": 20.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "椰浆 Cream of Coconut",
-     "parts": 1.5,
-     "abv": 0
+     "parts": 15.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "菠萝汁 Pineapple Juice",
-     "parts": 1.5,
-     "abv": 0
+     "parts": 15.0,
+     "abv": 0,
+     "unit": "ml"
     }
    ]
   },
@@ -389,18 +414,21 @@
    "ingredients": [
     {
      "name": "白朗姆 White Rum",
-     "parts": 1.5,
-     "abv": 40
+     "parts": 15.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "鲜青柠汁 Lime Juice",
-     "parts": 0.5,
-     "abv": 0
+     "parts": 5.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "可乐 Cola",
-     "parts": 3,
-     "abv": 0
+     "parts": 30.0,
+     "abv": 0,
+     "unit": "ml"
     }
    ]
   },
@@ -419,23 +447,27 @@
    "ingredients": [
     {
      "name": "朗姆酒 Rum",
-     "parts": 2,
-     "abv": 40
+     "parts": 20.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "菠萝汁 Pineapple Juice",
-     "parts": 4,
-     "abv": 0
+     "parts": 40.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "鲜橙汁 Orange Juice",
-     "parts": 1,
-     "abv": 0
+     "parts": 10.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "椰浆 Cream of Coconut",
-     "parts": 1,
-     "abv": 0
+     "parts": 10.0,
+     "abv": 0,
+     "unit": "ml"
     }
    ]
   },
@@ -454,18 +486,21 @@
    "ingredients": [
     {
      "name": "龙舌兰 Tequila",
-     "parts": 2,
-     "abv": 40
+     "parts": 20.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "君度橙酒 Triple Sec",
-     "parts": 1,
-     "abv": 40
+     "parts": 10.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "鲜青柠汁 Lime Juice",
-     "parts": 1,
-     "abv": 0
+     "parts": 10.0,
+     "abv": 0,
+     "unit": "ml"
     }
    ]
   },
@@ -484,18 +519,21 @@
    "ingredients": [
     {
      "name": "龙舌兰 Tequila",
-     "parts": 3,
-     "abv": 40
+     "parts": 30.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "鲜橙汁 Orange Juice",
-     "parts": 6,
-     "abv": 0
+     "parts": 60.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "石榴糖浆 Grenadine",
-     "parts": 0.75,
-     "abv": 0
+     "parts": 7.5,
+     "abv": 0,
+     "unit": "ml"
     }
    ]
   },
@@ -514,18 +552,21 @@
    "ingredients": [
     {
      "name": "干邑白兰地 Cognac",
-     "parts": 2,
-     "abv": 40
+     "parts": 20.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "君度橙酒 Triple Sec",
-     "parts": 1,
-     "abv": 40
+     "parts": 10.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "柠檬汁 Lemon Juice",
-     "parts": 1,
-     "abv": 0
+     "parts": 10.0,
+     "abv": 0,
+     "unit": "ml"
     }
    ]
   },
@@ -544,13 +585,15 @@
    "ingredients": [
     {
      "name": "金酒 Gin",
-     "parts": 6,
-     "abv": 40
+     "parts": 60.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "干味美思 Dry Vermouth",
-     "parts": 1,
-     "abv": 15
+     "parts": 10.0,
+     "abv": 15,
+     "unit": "ml"
     }
    ]
   },
@@ -569,23 +612,27 @@
    "ingredients": [
     {
      "name": "金酒 Gin",
-     "parts": 1.5,
-     "abv": 40
+     "parts": 15.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "樱桃利口酒 Maraschino",
-     "parts": 0.5,
-     "abv": 28
+     "parts": 5.0,
+     "abv": 28,
+     "unit": "ml"
     },
     {
      "name": "柠檬汁 Lemon Juice",
-     "parts": 0.75,
-     "abv": 0
+     "parts": 7.5,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "紫罗兰利口酒 Crème de Violette",
-     "parts": 0.25,
-     "abv": 20
+     "parts": 2.5,
+     "abv": 20,
+     "unit": "ml"
     }
    ]
   },
@@ -604,18 +651,21 @@
    "ingredients": [
     {
      "name": "金酒 Gin",
-     "parts": 1,
-     "abv": 40
+     "parts": 10.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "金巴利 Campari",
-     "parts": 1,
-     "abv": 25
+     "parts": 10.0,
+     "abv": 25,
+     "unit": "ml"
     },
     {
      "name": "甜味美思 Sweet Vermouth",
-     "parts": 1,
-     "abv": 16
+     "parts": 10.0,
+     "abv": 16,
+     "unit": "ml"
     }
    ]
   },
@@ -634,23 +684,27 @@
    "ingredients": [
     {
      "name": "金酒 Gin",
-     "parts": 2,
-     "abv": 40
+     "parts": 20.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "柠檬汁 Lemon Juice",
-     "parts": 1,
-     "abv": 0
+     "parts": 10.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "糖浆 Sugar Syrup",
-     "parts": 1,
-     "abv": 0
+     "parts": 10.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "苏打水 Soda Water",
-     "parts": 3,
-     "abv": 0
+     "parts": 30.0,
+     "abv": 0,
+     "unit": "ml"
     }
    ]
   },
@@ -669,13 +723,15 @@
    "ingredients": [
     {
      "name": "金酒 Gin",
-     "parts": 1,
-     "abv": 40
+     "parts": 10.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "汤力水 Tonic Water",
-     "parts": 2.5,
-     "abv": 0
+     "parts": 25.0,
+     "abv": 0,
+     "unit": "ml"
     }
    ]
   },
@@ -694,43 +750,51 @@
    "ingredients": [
     {
      "name": "金酒 Gin",
-     "parts": 3,
-     "abv": 40
+     "parts": 30.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "柠檬汁 Lemon Juice",
-     "parts": 1,
-     "abv": 0
+     "parts": 10.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "鲜青柠汁 Lime Juice",
-     "parts": 0.3,
-     "abv": 0
+     "parts": 3.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "糖浆 Sugar Syrup",
-     "parts": 1,
-     "abv": 0
+     "parts": 10.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "鲜奶油 Fresh Cream",
-     "parts": 2,
-     "abv": 0
+     "parts": 20.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "蛋清 Egg White",
-     "parts": 1,
-     "abv": 0
+     "parts": 10.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "橙花水 Orange Flower Water",
-     "parts": 0.1,
-     "abv": 0
+     "parts": 1.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "苏打水 Soda Water",
-     "parts": 3,
-     "abv": 0
+     "parts": 30.0,
+     "abv": 0,
+     "unit": "ml"
     }
    ]
   },
@@ -749,18 +813,21 @@
    "ingredients": [
     {
      "name": "波本威士忌 Bourbon Whiskey",
-     "parts": 6,
-     "abv": 40
+     "parts": 60.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "糖浆 Sugar Syrup",
-     "parts": 0.5,
-     "abv": 0
+     "parts": 5.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "安高天娜苦精 Bitters",
-     "parts": 0.2,
-     "abv": 40
+     "parts": 2.0,
+     "abv": 40,
+     "unit": "ml"
     }
    ]
   },
@@ -779,13 +846,15 @@
    "ingredients": [
     {
      "name": "苏格兰威士忌 Scotch Whisky",
-     "parts": 2,
-     "abv": 40
+     "parts": 20.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "杏仁利口酒 Amaretto",
-     "parts": 1,
-     "abv": 28
+     "parts": 10.0,
+     "abv": 28,
+     "unit": "ml"
     }
    ]
   },
@@ -804,23 +873,27 @@
    "ingredients": [
     {
      "name": "波本威士忌 Bourbon Whiskey",
-     "parts": 2,
-     "abv": 40
+     "parts": 20.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "柠檬汁 Lemon Juice",
-     "parts": 1,
-     "abv": 0
+     "parts": 10.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "糖浆 Sugar Syrup",
-     "parts": 0.75,
-     "abv": 0
+     "parts": 7.5,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "蛋清 Egg White",
-     "parts": 1,
-     "abv": 0
+     "parts": 10.0,
+     "abv": 0,
+     "unit": "ml"
     }
    ]
   },
@@ -839,18 +912,21 @@
    "ingredients": [
     {
      "name": "咖啡利口酒 Coffee Liqueur",
-     "parts": 1,
-     "abv": 20
+     "parts": 10.0,
+     "abv": 20,
+     "unit": "ml"
     },
     {
      "name": "百利甜酒 Baileys",
-     "parts": 1,
-     "abv": 17
+     "parts": 10.0,
+     "abv": 17,
+     "unit": "ml"
     },
     {
      "name": "金万利 Grand Marnier",
-     "parts": 1,
-     "abv": 40
+     "parts": 10.0,
+     "abv": 40,
+     "unit": "ml"
     }
    ]
   },
@@ -869,38 +945,45 @@
    "ingredients": [
     {
      "name": "伏特加 Vodka",
-     "parts": 0.5,
-     "abv": 40
+     "parts": 5.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "金酒 Gin",
-     "parts": 0.5,
-     "abv": 40
+     "parts": 5.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "白朗姆 White Rum",
-     "parts": 0.5,
-     "abv": 40
+     "parts": 5.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "龙舌兰 Tequila",
-     "parts": 0.5,
-     "abv": 40
+     "parts": 5.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "君度橙酒 Triple Sec",
-     "parts": 0.5,
-     "abv": 40
+     "parts": 5.0,
+     "abv": 40,
+     "unit": "ml"
     },
     {
      "name": "柠檬汁+糖浆 Sour Mix",
-     "parts": 1.5,
-     "abv": 0
+     "parts": 15.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "可乐 Cola",
-     "parts": 2,
-     "abv": 0
+     "parts": 20.0,
+     "abv": 0,
+     "unit": "ml"
     }
    ]
   },
@@ -919,28 +1002,33 @@
    "ingredients": [
     {
      "name": "苏格兰威士忌 Scotch Whisky",
-     "parts": 6,
-     "abv": 43
+     "parts": 60.0,
+     "abv": 43,
+     "unit": "ml"
     },
     {
      "name": "泥煤威士忌 Islay Whisky（漂浮）",
-     "parts": 1,
-     "abv": 45
+     "parts": 10.0,
+     "abv": 45,
+     "unit": "ml"
     },
     {
      "name": "柠檬汁 Lemon Juice",
-     "parts": 2,
-     "abv": 0
+     "parts": 20.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "蜂蜜糖浆 Honey Syrup",
-     "parts": 2,
-     "abv": 0
+     "parts": 20.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "姜糖浆 Ginger Syrup",
-     "parts": 1.5,
-     "abv": 0
+     "parts": 15.0,
+     "abv": 0,
+     "unit": "ml"
     }
    ]
   },
@@ -1061,18 +1149,21 @@
    "ingredients": [
     {
      "name": "威士忌 Whiskey",
-     "parts": 3,
-     "abv": 43
+     "parts": 30.0,
+     "abv": 43,
+     "unit": "ml"
     },
     {
      "name": "苏打水 Soda Water",
-     "parts": 6,
-     "abv": 0
+     "parts": 60.0,
+     "abv": 0,
+     "unit": "ml"
     },
     {
      "name": "柠檬汁 Lemon Juice",
-     "parts": 0.5,
-     "abv": 0
+     "parts": 5.0,
+     "abv": 0,
+     "unit": "ml"
     }
    ]
   },
