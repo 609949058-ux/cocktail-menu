@@ -2079,15 +2079,9 @@
    "glass": "Coupe 鸡尾酒杯",
    "garnish": "柠檬 twist",
    "method": "摇和 Shake",
-   "notes": "白兰地与白朗姆并肩，君度橙酒添果香，柠檬汁点亮，三段均衡如字母 XYZ。",
+   "notes": "白朗姆打底，君度橙酒添果香，柠檬汁点亮酸甜，三段利落如字母 XYZ。",
    "dilution": 0.5,
    "ingredients": [
-    {
-     "name": "白兰地 Brandy",
-     "parts": 30,
-     "abv": 40,
-     "unit": "ml"
-    },
     {
      "name": "白朗姆 White Rum",
      "parts": 30,
