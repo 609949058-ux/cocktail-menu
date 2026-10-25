@@ -2023,6 +2023,45 @@
      "unit": "个"
     }
    ]
+  },
+  {
+   "id": "midori-sour",
+   "name_en": "Midori Sour",
+   "name_zh": "蜜多利酸酒",
+   "category": "其他 Other",
+   "accent": "#8fc24a",
+   "image": "/Users/geminy/WorkBuddy/2026-09-02-20-10-28/cocktail_demo/deploy/assets/midori-sour.jpg",
+   "glass": "Coupe 鸡尾酒杯",
+   "garnish": "柠檬 twist",
+   "method": "摇和 Shake",
+   "notes": "蜜多利的蜜瓜香甜被柠檬酸收束，蛋清打出丝绒泡沫，清新甜美。",
+   "dilution": 0.5,
+   "ingredients": [
+    {
+     "name": "蜜多利（蜜瓜利口酒）Midori Melon Liqueur",
+     "parts": 45,
+     "abv": 21,
+     "unit": "ml"
+    },
+    {
+     "name": "柠檬汁 Lemon Juice",
+     "parts": 20,
+     "abv": 0,
+     "unit": "ml"
+    },
+    {
+     "name": "糖浆 Sugar Syrup",
+     "parts": 10,
+     "abv": 0,
+     "unit": "ml"
+    },
+    {
+     "name": "蛋清 Egg White",
+     "parts": 1,
+     "abv": 0,
+     "unit": "个"
+    }
+   ]
   }
  ]
 }
