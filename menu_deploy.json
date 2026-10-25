@@ -2034,7 +2034,7 @@
    "glass": "Coupe 鸡尾酒杯",
    "garnish": "柠檬 twist",
    "method": "摇和 Shake",
-   "notes": "蜜多利的蜜瓜香甜被柠檬酸收束，蛋清打出丝绒泡沫，清新甜美。",
+   "notes": "蜜多利蜜瓜香甜被柠檬酸收束，白朗姆添一丝烈感，蛋清打出绵密泡沫。",
    "dilution": 0.5,
    "ingredients": [
     {
@@ -2045,14 +2045,20 @@
     },
     {
      "name": "柠檬汁 Lemon Juice",
-     "parts": 20,
+     "parts": 30,
      "abv": 0,
      "unit": "ml"
     },
     {
      "name": "糖浆 Sugar Syrup",
-     "parts": 10,
+     "parts": 15,
      "abv": 0,
+     "unit": "ml"
+    },
+    {
+     "name": "白朗姆 White Rum",
+     "parts": 15,
+     "abv": 40,
      "unit": "ml"
     },
     {
