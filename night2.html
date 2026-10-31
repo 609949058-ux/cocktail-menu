@@ -289,6 +289,21 @@
 </div>
 <script>
 (function(){
+  // 整段拉取 mp3 转 Blob 播放，绕开 GitHub Pages 不支持 Range 导致的「只播前几秒」
+  window.__ensureBlob = function(aud){
+    if(aud._blobP) return aud._blobP;
+    var url = aud.getAttribute('src');
+    if(!url || url.indexOf('blob:')===0){ return Promise.resolve(url); }
+    aud._blobP = fetch(url).then(function(r){
+      if(!r.ok) throw new Error('fetch '+r.status);
+      return r.blob();
+    }).then(function(b){
+      var obj = URL.createObjectURL(b);
+      aud._blobUrl = obj;
+      return obj;
+    }).catch(function(err){ aud._blobP = null; throw err; });
+    return aud._blobP;
+  };
   var players = Array.prototype.slice.call(document.querySelectorAll('.song-play'));
   players.forEach(function(btn){
     var aid = btn.getAttribute('data-audio');
@@ -324,10 +339,28 @@
         }
       });
       if(aud.paused){
-        aud.play();
-        btn.classList.add('playing');
-        if(lbl) lbl.textContent = '暂停';
-        if(ic) ic.innerHTML = '&#10073;&#10073;';
+        if(status) status.textContent = '音频加载中…';
+        btn.classList.add('pending');
+        window.__ensureBlob(aud).then(function(objUrl){
+          if(objUrl && aud.src !== objUrl){ aud.src = objUrl; }
+          return aud.play();
+        }).then(function(){
+          btn.classList.remove('pending');
+          btn.classList.add('playing');
+          if(lbl) lbl.textContent = '暂停';
+          if(ic) ic.innerHTML = '&#10073;&#10073;';
+          if(status) status.textContent = '';
+        }).catch(function(){
+          btn.classList.remove('pending');
+          if(status) status.textContent = '加载失败，已重试';
+          // 回退：直接播原始 src
+          aud.src = aud.getAttribute('src');
+          aud.play().then(function(){
+            btn.classList.add('playing');
+            if(lbl) lbl.textContent='暂停'; if(ic) ic.innerHTML='&#10073;&#10073;';
+            if(status) status.textContent='';
+          }).catch(function(){});
+        });
       } else {
         aud.pause();
         btn.classList.remove('playing');
@@ -362,8 +395,12 @@
     aud.addEventListener('ended', function(){ track.style.transform='translateY(0)'; for(var i=0;i<num;i++) lines[i].classList.remove('active'); });
     lines.forEach(function(ln){
       ln.addEventListener('click', function(){
-        aud.currentTime=parseFloat(ln.getAttribute('data-t'));
-        if(aud.paused) aud.play();
+        var t=parseFloat(ln.getAttribute('data-t'));
+        var go=function(){ aud.currentTime=t; if(aud.paused) aud.play(); };
+        if(window.__ensureBlob){
+          window.__ensureBlob(aud).then(function(objUrl){ if(objUrl && aud.src!==objUrl) aud.src=objUrl; go(); })
+            .catch(function(){ go(); });
+        } else { go(); }
       });
     });
   }
