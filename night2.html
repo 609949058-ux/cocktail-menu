@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第二夜 · 特调 Cocktail Menu</title>
+<style>
+  :root{
+    --bg1:#08131f; --bg2:#0c2236; --card:#0e2538; --card2:#123048;
+    --ink:#e9f3fb; --ink-dim:#93b2c9; --line:rgba(255,255,255,.10);
+    --accent:#5cc6ef; --accent2:#9fe3f5;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background:
+      radial-gradient(1100px 600px at 82% -10%, #14364f 0%, transparent 60%),
+      radial-gradient(900px 500px at 5% 110%, #0c2a3e 0%, transparent 55%),
+      linear-gradient(160deg,var(--bg1),var(--bg2));
+    color:var(--ink);
+    min-height:100vh;
+    padding:40px 20px 64px;
+  }
+  .wrap{max-width:1100px;margin:0 auto;}
+  /* 夜切换 */
+  .night-switch{display:flex;justify-content:center;gap:0;margin:0 auto 34px;max-width:420px;}
+  .ns-link{flex:1;text-align:center;text-decoration:none;font-size:15px;font-weight:700;letter-spacing:.08em;padding:11px 0;color:var(--ink-dim);background:rgba(255,255,255,.04);border:1px solid var(--line);transition:all .18s ease;}
+  .ns-link:first-child{border-radius:999px 0 0 999px;}
+  .ns-link:last-child{border-radius:0 999px 999px 0;}
+  .ns-link.active{background:linear-gradient(90deg,#7fd6f3,#3f9fd0);color:#04141f;border-color:var(--accent);}
+  .ns-link:hover{color:#fff;}
+  header.page{text-align:center;margin-bottom:10px;}
+  .brand{display:inline-flex;align-items:center;gap:12px;}
+  .brand svg{filter:drop-shadow(0 0 10px rgba(92,198,239,.5));}
+  header.page h1{font-size:clamp(30px,6vw,52px);letter-spacing:.06em;font-weight:800;
+    background:linear-gradient(90deg,#cfeeff,#5cc6ef,#cfeeff);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  header.page .subtitle{font-size:18px;font-style:italic;letter-spacing:.14em;color:var(--accent);margin-top:10px;font-weight:600;}
+  header.page p.lead{color:var(--ink-dim);margin:18px auto 0;max-width:660px;font-size:15px;line-height:1.75;}
+  .chapter{margin:46px 0 22px;display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:1px solid var(--line);}
+  .chapter .ch-zh{font-size:26px;font-weight:800;letter-spacing:.04em;
+    background:linear-gradient(90deg,#cfeeff,#5cc6ef,#cfeeff);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .chapter .ch-en{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);}
+  .chapter .ch-note{margin-left:auto;font-size:12px;color:var(--ink-dim);}
+  .grid{display:grid;gap:26px;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));}
+  .card{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.45);display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease;}
+  .card:hover{transform:translateY(-6px);box-shadow:0 26px 54px rgba(0,0,0,.55);}
+  .photo{position:relative;height:230px;background:linear-gradient(160deg,#0c2138,#103050);overflow:hidden;}
+  .photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  .photo .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--ink-dim);}
+  .photo .ph .phz{font-size:26px;font-weight:800;color:rgba(255,255,255,.92);letter-spacing:.08em;text-shadow:0 2px 10px rgba(0,0,0,.5);}
+  .photo .ph .phs{font-size:12px;letter-spacing:.18em;opacity:.85;}
+  .stripe{height:5px;width:100%;background:var(--accent);}
+  .body{padding:20px 20px 22px;display:flex;flex-direction:column;gap:14px;flex:1;}
+  .title-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
+  .names .zh{font-size:24px;font-weight:800;line-height:1.15;}
+  .names .en{font-size:13px;color:var(--ink-dim);margin-top:3px;letter-spacing:.08em;}
+  .abv{text-align:center;flex:0 0 auto;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:12px;padding:8px 12px;min-width:74px;}
+  .abv b{display:block;font-size:22px;color:var(--accent);font-weight:800;line-height:1;}
+  .abv span{font-size:10px;color:var(--ink-dim);letter-spacing:.1em;}
+  .song{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:rgba(92,198,239,.08);border:1px solid rgba(92,198,239,.3);border-radius:14px;padding:12px 14px;}
+  .song .s-ic{font-size:18px;color:var(--accent);}
+  .song .s-meta{flex:1;min-width:140px;}
+  .song .s-title{font-size:15px;font-weight:700;color:var(--ink);}
+  .song .s-sub{font-size:12px;color:var(--ink-dim);margin-top:2px;letter-spacing:.04em;}
+  .song .s-status{font-size:11px;color:var(--accent2);width:100%;margin-top:2px;min-height:14px;}
+  .song-play{cursor:pointer;border:none;border-radius:999px;padding:9px 16px;font-size:13px;font-weight:700;font-family:inherit;background:linear-gradient(135deg,#7fd6f3,#3f9fd0);color:#04141f;display:inline-flex;align-items:center;gap:7px;transition:transform .12s ease,filter .12s ease;}
+  .song-play:active{transform:scale(.94);}
+  .song-play .ic{font-size:13px;line-height:1;}
+  .song-play.playing{background:linear-gradient(135deg,#3f9fd0,#2b7fb0);color:#eaf6ff;}
+  .song-play.pending{background:rgba(92,198,239,.14);color:var(--accent);border:1px solid rgba(92,198,239,.4);}
+  .cat{display:inline-block;font-size:11px;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:3px 10px;letter-spacing:.06em;}
+  .ings{display:flex;flex-direction:column;gap:8px;margin-top:2px;}
+  .ing{display:flex;align-items:center;gap:10px;font-size:13px;}
+  .ing .n{flex:1;color:var(--ink);}
+  .ing .b{height:8px;border-radius:6px;background:var(--accent);opacity:.85;min-width:0;}
+  .ing .p{font-variant-numeric:tabular-nums;color:var(--ink-dim);font-size:12px;min-width:54px;text-align:right;}
+  .meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--ink-dim);margin-top:2px;}
+  .meta span b{color:var(--ink);font-weight:600;}
+  .notes{font-size:12.5px;color:var(--ink-dim);line-height:1.6;border-top:1px dashed var(--line);padding-top:12px;margin-top:auto;}
+  footer.page{text-align:center;color:var(--ink-dim);font-size:12px;margin-top:50px;letter-spacing:.06em;line-height:1.9;}
+  @media (max-width:560px){.photo{height:200px;}.chapter .ch-note{display:none;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="night-switch">
+    <a class="ns-link" href="index.html">第一夜</a>
+    <a class="ns-link active" href="night2.html">第二夜</a>
+  </div>
+  <header class="page">
+    <div class="brand">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+        <path d="M23 5a13 13 0 1 0 0 24 10 10 0 0 1 0-24z" fill="#0c2236" stroke="#5cc6ef" stroke-width="1.4"/>
+        <circle cx="11" cy="11" r="1.2" fill="#9fe3f5"/>
+        <circle cx="16" cy="8" r="1" fill="#9fe3f5"/>
+        <circle cx="8" cy="17" r="1" fill="#9fe3f5"/>
+      </svg>
+      <h1>第二夜</h1>
+    </div>
+    <div class="subtitle">你的特调 · 粤语为伴</div>
+    <p class="lead">与第一夜的经典不同，这一夜是我自己的特调。每一杯都配一首粤语歌——点歌名后的播放键，听这一杯的心事。</p>
+  </header>
+
+  <section>
+    <div class="chapter"><span class="ch-zh">微醺</span><span class="ch-en">Tipsy</span><span class="ch-note">入夜后的第一杯，轻盈而甜</span></div>
+    <div class="grid">
+      <div class="card" id="card-ziyouxing" style="--accent:#5cc6ef">
+        <div class="photo" id="ph-ziyouxing"><div class="ph"><div class="phz">自由行</div><div class="phs">图片待上传</div></div></div>
+        <div class="stripe" style="background:#5cc6ef"></div>
+        <div class="body">
+          <div class="title-row">
+            <div class="names"><div class="zh">自由行</div><div class="en">粤语 · 杨千嬅</div></div>
+            <div class="abv"><b>22.9</b><span>% ABV</span></div>
+          </div>
+          <div class="song">
+            <span class="s-ic">&#9834;</span>
+            <div class="s-meta">
+              <div class="s-title">《自由行》</div>
+              <div class="s-sub">杨千嬅 · 这一杯的粤语 BGM</div>
+              <div class="s-status" id="st-ziyouxing"></div>
+            </div>
+            <button class="song-play" type="button" data-audio="aud-ziyouxing" data-status="st-ziyouxing" aria-label="播放 自由行"><span class="ic">&#9654;</span><span class="lbl">播放</span></button>
+            <audio id="aud-ziyouxing" src="" preload="none"></audio>
+          </div>
+          <span class="cat">特调 · 蜜瓜</span>
+          <div class="ings">
+            <div class="ing"><span class="n">金酒 Gin</span><span class="b" style="width:120px"></span><span class="p">45 ml</span></div>
+            <div class="ing"><span class="n">蜜瓜 Melon</span><span class="p">2 块</span></div>
+            <div class="ing"><span class="n">蜜力多 Midori</span><span class="b" style="width:80px"></span><span class="p">30 ml</span></div>
+            <div class="ing"><span class="n">柠檬汁 Lemon Juice</span><span class="b" style="width:53px"></span><span class="p">20 ml</span></div>
+            <div class="ing"><span class="n">糖浆 Sugar Syrup</span><span class="b" style="width:27px"></span><span class="p">10 ml</span></div>
+          </div>
+          <div class="meta"><span>杯型 <b>碟形杯 / Coupe</b></span><span>调制 <b>摇和 Shake</b></span></div>
+          <div class="notes">蜜瓜的清甜裹着金酒的利落，像歌里那句「自由行」——没有目的地，只有风。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="chapter"><span class="ch-zh">沉夜</span><span class="ch-en">Deep Night</span><span class="ch-note">苦甜交锋，越夜越清醒</span></div>
+    <div class="grid">
+      <div class="card" id="card-xinwen" style="--accent:#4a90d8">
+        <div class="photo" id="ph-xinwen"><div class="ph"><div class="phz">新闻女郎</div><div class="phs">图片待上传</div></div></div>
+        <div class="stripe" style="background:#4a90d8"></div>
+        <div class="body">
+          <div class="title-row">
+            <div class="names"><div class="zh">新闻女郎</div><div class="en">粤语 · 梁汉文</div></div>
+            <div class="abv"><b>29.8</b><span>% ABV</span></div>
+          </div>
+          <div class="song">
+            <span class="s-ic">&#9834;</span>
+            <div class="s-meta">
+              <div class="s-title">《新闻女郎》</div>
+              <div class="s-sub">梁汉文 · 这一杯的粤语 BGM</div>
+              <div class="s-status" id="st-xinwen"></div>
+            </div>
+            <button class="song-play" type="button" data-audio="aud-xinwen" data-status="st-xinwen" aria-label="播放 新闻女郎"><span class="ic">&#9654;</span><span class="lbl">播放</span></button>
+            <audio id="aud-xinwen" src="" preload="none"></audio>
+          </div>
+          <span class="cat">特调 · 尼格罗尼变种</span>
+          <div class="ings">
+            <div class="ing"><span class="n">金酒 Gin</span><span class="b" style="width:120px"></span><span class="p">45 ml</span></div>
+            <div class="ing"><span class="n">金巴利 Campari</span><span class="b" style="width:80px"></span><span class="p">30 ml</span></div>
+            <div class="ing"><span class="n">红味美思 Sweet Vermouth</span><span class="b" style="width:67px"></span><span class="p">25 ml</span></div>
+            <div class="ing"><span class="n">苦精 Bitters</span><span class="b" style="width:6px"></span><span class="p">3 Dashes</span></div>
+          </div>
+          <div class="meta"><span>杯型 <b>古典杯 / Old Fashioned</b></span><span>装饰 <b>橙皮卷</b></span><span>调制 <b>搅拌 Stir</b></span></div>
+          <div class="notes">尼格罗尼的变奏：金酒、金巴利、红味美思，三色交叠如深夜的霓虹。几点苦精，是新闻女郎眉间的那点冷。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="page">
+    第二夜 · 未完待续<br>
+    第一夜：经典鸡尾酒 · 周六的 Cocktail Menu
+  </footer>
+</div>
+<script>
+(function(){
+  var players = Array.prototype.slice.call(document.querySelectorAll('.song-play'));
+  players.forEach(function(btn){
+    var aid = btn.getAttribute('data-audio');
+    var sid = btn.getAttribute('data-status');
+    var aud = document.getElementById(aid);
+    var status = sid ? document.getElementById(sid) : null;
+    var lbl = btn.querySelector('.lbl');
+    var ic = btn.querySelector('.ic');
+
+    if(aud){
+      aud.addEventListener('ended', function(){
+        btn.classList.remove('playing');
+        if(lbl) lbl.textContent = '播放';
+        if(ic) ic.innerHTML = '&#9654;';
+      });
+    }
+
+    btn.addEventListener('click', function(){
+      // 音频尚未提供：提示待上传
+      if(!aud || aud.getAttribute('src') === ''){
+        if(status) status.textContent = '音频待上传，稍后开放 ♪';
+        btn.classList.add('pending');
+        return;
+      }
+      // 播放前先暂停其它
+      players.forEach(function(b){
+        if(b !== btn){
+          var o = document.getElementById(b.getAttribute('data-audio'));
+          if(o) o.pause();
+          b.classList.remove('playing');
+          var bl = b.querySelector('.lbl'); if(bl) bl.textContent = '播放';
+          var bi = b.querySelector('.ic'); if(bi) bi.innerHTML = '&#9654;';
+        }
+      });
+      if(aud.paused){
+        aud.play();
+        btn.classList.add('playing');
+        if(lbl) lbl.textContent = '暂停';
+        if(ic) ic.innerHTML = '&#10073;&#10073;';
+      } else {
+        aud.pause();
+        btn.classList.remove('playing');
+        if(lbl) lbl.textContent = '播放';
+        if(ic) ic.innerHTML = '&#9654;';
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

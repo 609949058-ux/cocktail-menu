@@ -286,10 +286,22 @@
     .spirit-link.active{ border-left:none; border-bottom-color:var(--gold); }
     .spirit-section{ scroll-margin-top:66px; }
   }
+
+  /* 第一夜 / 第二夜 切换 */
+  .night-switch{display:flex;justify-content:center;gap:0;margin:0 auto 34px;max-width:420px;}
+  .ns-link{flex:1;text-align:center;text-decoration:none;font-size:15px;font-weight:700;letter-spacing:.08em;padding:11px 0;color:var(--ink-dim);background:rgba(255,255,255,.04);border:1px solid var(--line);transition:all .18s ease;}
+  .ns-link:first-child{border-radius:999px 0 0 999px;}
+  .ns-link:last-child{border-radius:0 999px 999px 0;}
+  .ns-link.active{background:linear-gradient(90deg,#f3d99a,#d8b25e);color:#221a10;border-color:var(--gold);}
+  .ns-link:hover{color:#fff;}
 </style>
 </head>
 <body>
 <div class="wrap">
+  <div class="night-switch">
+    <a class="ns-link active" href="index.html">第一夜</a>
+    <a class="ns-link" href="night2.html">第二夜</a>
+  </div>
   <header class="page">
     <h1>周六的Cocktail Menu</h1>
     
