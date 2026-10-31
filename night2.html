@@ -72,6 +72,13 @@
   .meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--ink-dim);margin-top:2px;}
   .meta span b{color:var(--ink);font-weight:600;}
   .notes{font-size:12.5px;color:var(--ink-dim);line-height:1.6;border-top:1px dashed var(--line);padding-top:12px;margin-top:auto;}
+  .lyric{max-height:175px;overflow-y:auto;margin-top:8px;padding:12px 14px;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;font-size:13px;line-height:2;scrollbar-width:thin;}
+  .lyric .ln{color:var(--ink-dim);cursor:pointer;padding:1px 0;transition:color .2s,transform .2s;transform-origin:left;}
+  .lyric .ln:hover{color:#cfe9f7;}
+  .lyric .ln.active{color:var(--accent);font-weight:700;transform:scale(1.04);}
+  .lyric .ln.active::before{content:'\266A ';}
+  .lyric::-webkit-scrollbar{width:6px;}
+  .lyric::-webkit-scrollbar-thumb{background:rgba(92,198,239,.35);border-radius:3px;}
   footer.page{text-align:center;color:var(--ink-dim);font-size:12px;margin-top:50px;letter-spacing:.06em;line-height:1.9;}
   @media (max-width:560px){.photo{height:300px;}}
 </style>
@@ -112,7 +119,55 @@
               <div class="s-status" id="st-ziyouxing"></div>
             </div>
             <button class="song-play" type="button" data-audio="aud-ziyouxing" data-status="st-ziyouxing" aria-label="播放 自由行"><span class="ic">&#9654;</span><span class="lbl">播放</span></button>
-            <audio id="aud-ziyouxing" src="" preload="none"></audio>
+            <audio id="aud-ziyouxing" src="assets/ziyouxing.mp3" preload="none"></audio>
+          </div>
+          <div class="lyric" id="ly-ziyouxing">
+<p class="ln" data-t="0.00">作词 : 黄伟文</p>
+<p class="ln" data-t="1.00">作曲 : 雷颂德</p>
+<p class="ln" data-t="2.00">编曲 : 雷颂德</p>
+<p class="ln" data-t="14.31">编曲：雷颂德</p>
+<p class="ln" data-t="16.51">当我在蒙马特 看遍满街的马戏</p>
+<p class="ln" data-t="24.06">无端却渐觉 太自由 再也变不出惊喜</p>
+<p class="ln" data-t="32.40">避了你至少 几千百公里</p>
+<p class="ln" data-t="35.79">原来为了让你不愿再度被提起</p>
+<p class="ln" data-t="40.05">遇不到他 怎够狠 放得开你</p>
+<p class="ln" data-t="44.03">愿我那尾站在马德里</p>
+<p class="ln" data-t="46.86">伤心就旅行 盼会遇上安份</p>
+<p class="ln" data-t="50.90">在地球尽处 共我拥吻</p>
+<p class="ln" data-t="54.89">最怕世上游遍 发觉没有此人</p>
+<p class="ln" data-t="58.94">冰岛也没有 避世的小镇</p>
+<p class="ln" data-t="62.61">一生在旅行 买票预了双份</p>
+<p class="ln" data-t="66.86">站站停下 最后也空等</p>
+<p class="ln" data-t="70.89">毕竟也自由过 算有幸 有不幸</p>
+<p class="ln" data-t="74.74">当作四处消遣散心 预备六十六岁初吻</p>
+<p class="ln" data-t="88.12">巴格达莫斯科 发觉我一早去过</p>
+<p class="ln" data-t="95.69">如果放病假 会复元 假已放得这么多</p>
+<p class="ln" data-t="103.74">大概也够钟想想到底我</p>
+<p class="ln" data-t="107.28">沿途扮够任性 需要坐定下来么</p>
+<p class="ln" data-t="111.61">负伤出走 荒野中露宿的我</p>
+<p class="ln" data-t="115.59">下个圣诞夜 又要怎过</p>
+<p class="ln" data-t="118.51">伤心就旅行 盼会遇上安份</p>
+<p class="ln" data-t="122.54">在地球尽处 共我拥吻</p>
+<p class="ln" data-t="126.52">最怕世上游遍 发觉没有此人</p>
+<p class="ln" data-t="130.50">冰岛也没有 避世的小镇</p>
+<p class="ln" data-t="134.45">一生在旅行 买票预了双份</p>
+<p class="ln" data-t="138.39">站站停下 最后也空等</p>
+<p class="ln" data-t="142.44">毕竟也自由过 算有幸 有不幸</p>
+<p class="ln" data-t="146.43">当作四出消遣散心 预备六十六岁初吻</p>
+<p class="ln" data-t="167.46">要是我抱着那 漂泊的心</p>
+<p class="ln" data-t="171.68">路途上任谁 亦觉不合衬</p>
+<p class="ln" data-t="175.37">难道我走上露台赏灯</p>
+<p class="ln" data-t="179.25">未察觉 原来楼下有人</p>
+<p class="ln" data-t="182.66">伤心就旅行 盼会遇上安份</p>
+<p class="ln" data-t="186.21">在地球尽处 共我拥吻</p>
+<p class="ln" data-t="190.22">最怕世上游遍 发觉没有此人</p>
+<p class="ln" data-t="194.18">亲手破灭最后那 天真</p>
+<p class="ln" data-t="198.22">一生在旅行 买票预了双份</p>
+<p class="ln" data-t="202.18">站站停下 最后也空等</p>
+<p class="ln" data-t="206.20">今天决定回去 痛快地坐一阵</p>
+<p class="ln" data-t="210.06">最爱纵使真的要等</p>
+<p class="ln" data-t="213.06">静静坐着亦会走近</p>
+<p class="ln" data-t="219.31">监制：雷颂德</p>
           </div>
           <span class="cat">特调 · 蜜瓜</span>
           <div class="ings">
@@ -142,7 +197,74 @@
               <div class="s-status" id="st-xinwen"></div>
             </div>
             <button class="song-play" type="button" data-audio="aud-xinwen" data-status="st-xinwen" aria-label="播放 新闻女郎"><span class="ic">&#9654;</span><span class="lbl">播放</span></button>
-            <audio id="aud-xinwen" src="" preload="none"></audio>
+            <audio id="aud-xinwen" src="assets/xinwen.mp3" preload="none"></audio>
+          </div>
+          <div class="lyric" id="ly-xinwen">
+<p class="ln" data-t="0.00">作词 : 林夕</p>
+<p class="ln" data-t="0.00">作曲 : 王双骏</p>
+<p class="ln" data-t="0.00">作曲：王双骏</p>
+<p class="ln" data-t="1.00">作词：林夕</p>
+<p class="ln" data-t="2.00">编曲/监制：王双骏</p>
+<p class="ln" data-t="4.37">当美军要开战时</p>
+<p class="ln" data-t="7.40">听你报许多次</p>
+<p class="ln" data-t="10.39">你的嘴角有恨意</p>
+<p class="ln" data-t="14.14">或者声线有含意</p>
+<p class="ln" data-t="18.44">跑呀跑你使我留意</p>
+<p class="ln" data-t="22.24">所有动荡大事</p>
+<p class="ln" data-t="25.15">谁又无辜死于沙士</p>
+<p class="ln" data-t="28.88">可以怎咬字</p>
+<p class="ln" data-t="31.97">提及那七一</p>
+<p class="ln" data-t="34.32">维园的足迹逐寸铺</p>
+<p class="ln" data-t="39.32">明白你强忍的笑容</p>
+<p class="ln" data-t="42.25">为现场骄傲</p>
+<p class="ln" data-t="46.62">怀念殒落巨星</p>
+<p class="ln" data-t="51.32">但愿未提到</p>
+<p class="ln" data-t="55.54">仿佛你也想哭诉</p>
+<p class="ln" data-t="59.17">这一生也未用过心</p>
+<p class="ln" data-t="62.43">听新闻报导</p>
+<p class="ln" data-t="65.68">这一刻先知我未来</p>
+<p class="ln" data-t="69.87">能从新闻中看到</p>
+<p class="ln" data-t="73.67">你要变成主播做得好</p>
+<p class="ln" data-t="78.54">起码不枉费你辛劳</p>
+<p class="ln" data-t="82.16">愿你跟我亦进步</p>
+<p class="ln" data-t="88.48">听见的也都皱眉</p>
+<p class="ln" data-t="91.47">大时代找真理</p>
+<p class="ln" data-t="94.80">更必须振作士气</p>
+<p class="ln" data-t="98.50">要当主播却别生气</p>
+<p class="ln" data-t="102.63">转眼间已经到零四</p>
+<p class="ln" data-t="106.75">三百日回味</p>
+<p class="ln" data-t="109.29">我跟你都见证大事</p>
+<p class="ln" data-t="113.29">沦为好知己</p>
+<p class="ln" data-t="116.39">杨利伟到港</p>
+<p class="ln" data-t="118.87">维港的骚却像泡汤</p>
+<p class="ln" data-t="123.73">然后有几多真相又</p>
+<p class="ln" data-t="126.57">像调查所讲</p>
+<p class="ln" data-t="131.52">其实你若下班</p>
+<p class="ln" data-t="135.63">动静极狂放</p>
+<p class="ln" data-t="139.75">滚石你有否观看</p>
+<p class="ln" data-t="143.62">这一生也未用过心</p>
+<p class="ln" data-t="146.71">听新闻报导</p>
+<p class="ln" data-t="150.41">这刻先关心你仕途</p>
+<p class="ln" data-t="153.94">我却衷心的看好</p>
+<p class="ln" data-t="157.95">你快变成主播做得好</p>
+<p class="ln" data-t="162.76">起码都知道有公道</p>
+<p class="ln" data-t="166.49">能发奋便回报高</p>
+<p class="ln" data-t="171.98">终于分手了</p>
+<p class="ln" data-t="173.40">报导并没有讲</p>
+<p class="ln" data-t="176.00">只讲到有没有阳光</p>
+<p class="ln" data-t="178.93">谁是世上蝼蚁</p>
+<p class="ln" data-t="180.89">亦留恋这地方</p>
+<p class="ln" data-t="182.88">你我都紧守岗位</p>
+<p class="ln" data-t="184.93">那怕没人在看</p>
+<p class="ln" data-t="201.79">一点钟我独坐客厅</p>
+<p class="ln" data-t="205.40">等新闻报导</p>
+<p class="ln" data-t="209.13">这晚也正是我生日</p>
+<p class="ln" data-t="212.65">但求天天天气好</p>
+<p class="ln" data-t="216.75">你已变成主播做得好</p>
+<p class="ln" data-t="221.28">可以欣赏到你风度</p>
+<p class="ln" data-t="225.30">但你切勿麻木</p>
+<p class="ln" data-t="230.72">想看到你的笑容</p>
+<p class="ln" data-t="234.48">我是你的观众</p>
           </div>
           <span class="cat">特调 · 尼格罗尼变种</span>
           <div class="ings">
@@ -211,6 +333,39 @@
       }
     });
   });
+})();
+</script>
+
+<script>
+(function(){
+  function bindLyric(audId, lyId){
+    var aud=document.getElementById(audId), box=document.getElementById(lyId);
+    if(!aud||!box) return;
+    var lines=Array.prototype.slice.call(box.querySelectorAll('.ln')), prev=-1;
+    aud.addEventListener('timeupdate', function(){
+      var t=aud.currentTime, cur=-1;
+      for(var i=0;i<lines.length;i++){
+        if(parseFloat(lines[i].getAttribute('data-t'))<=t) cur=i; else break;
+      }
+      if(cur!==prev){
+        if(prev>=0&&lines[prev]) lines[prev].classList.remove('active');
+        if(cur>=0&&lines[cur]){
+          lines[cur].classList.add('active');
+          var off=lines[cur].offsetTop - box.clientHeight/2 + lines[cur].clientHeight/2;
+          box.scrollTo({top:Math.max(0,off), behavior:'smooth'});
+        }
+        prev=cur;
+      }
+    });
+    lines.forEach(function(ln){
+      ln.addEventListener('click', function(){
+        aud.currentTime=parseFloat(ln.getAttribute('data-t'));
+        if(aud.paused) aud.play();
+      });
+    });
+  }
+  bindLyric('aud-ziyouxing','ly-ziyouxing');
+  bindLyric('aud-xinwen','ly-xinwen');
 })();
 </script>
 </body>
