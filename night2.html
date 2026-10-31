@@ -35,12 +35,6 @@
   header.page h1{font-size:clamp(30px,6vw,52px);letter-spacing:.06em;font-weight:800;
     background:linear-gradient(90deg,#cfeeff,#5cc6ef,#cfeeff);-webkit-background-clip:text;background-clip:text;color:transparent;}
   header.page .subtitle{font-size:18px;font-style:italic;letter-spacing:.14em;color:var(--accent);margin-top:10px;font-weight:600;}
-  header.page p.lead{color:var(--ink-dim);margin:18px auto 0;max-width:660px;font-size:15px;line-height:1.75;}
-  .chapter{margin:46px 0 22px;display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:1px solid var(--line);}
-  .chapter .ch-zh{font-size:26px;font-weight:800;letter-spacing:.04em;
-    background:linear-gradient(90deg,#cfeeff,#5cc6ef,#cfeeff);-webkit-background-clip:text;background-clip:text;color:transparent;}
-  .chapter .ch-en{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);}
-  .chapter .ch-note{margin-left:auto;font-size:12px;color:var(--ink-dim);}
   .grid{display:grid;gap:26px;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));}
   .card{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.45);display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease;}
   .card:hover{transform:translateY(-6px);box-shadow:0 26px 54px rgba(0,0,0,.55);}
@@ -78,7 +72,7 @@
   .meta span b{color:var(--ink);font-weight:600;}
   .notes{font-size:12.5px;color:var(--ink-dim);line-height:1.6;border-top:1px dashed var(--line);padding-top:12px;margin-top:auto;}
   footer.page{text-align:center;color:var(--ink-dim);font-size:12px;margin-top:50px;letter-spacing:.06em;line-height:1.9;}
-  @media (max-width:560px){.photo{height:200px;}.chapter .ch-note{display:none;}}
+  @media (max-width:560px){.photo{height:200px;}}
 </style>
 </head>
 <body>
@@ -98,13 +92,10 @@
       <h1>第二夜</h1>
     </div>
     <div class="subtitle">你的特调 · 粤语为伴</div>
-    <p class="lead">与第一夜的经典不同，这一夜是我自己的特调。每一杯都配一首粤语歌——点歌名后的播放键，听这一杯的心事。</p>
   </header>
 
-  <section>
-    <div class="chapter"><span class="ch-zh">微醺</span><span class="ch-en">Tipsy</span><span class="ch-note">入夜后的第一杯，轻盈而甜</span></div>
-    <div class="grid">
-      <div class="card" id="card-ziyouxing" style="--accent:#5cc6ef">
+  <div class="grid">
+    <div class="card" id="card-ziyouxing" style="--accent:#5cc6ef">
         <div class="photo" id="ph-ziyouxing"><div class="ph"><div class="phz">自由行</div><div class="phs">图片待上传</div></div></div>
         <div class="stripe" style="background:#5cc6ef"></div>
         <div class="body">
@@ -134,12 +125,6 @@
           <div class="notes">蜜瓜的清甜裹着金酒的利落，像歌里那句「自由行」——没有目的地，只有风。</div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="chapter"><span class="ch-zh">沉夜</span><span class="ch-en">Deep Night</span><span class="ch-note">苦甜交锋，越夜越清醒</span></div>
-    <div class="grid">
       <div class="card" id="card-xinwen" style="--accent:#4a90d8">
         <div class="photo" id="ph-xinwen"><div class="ph"><div class="phz">新闻女郎</div><div class="phs">图片待上传</div></div></div>
         <div class="stripe" style="background:#4a90d8"></div>
@@ -170,7 +155,6 @@
         </div>
       </div>
     </div>
-  </section>
 
   <footer class="page">
     第二夜 · 未完待续<br>
